@@ -8,7 +8,9 @@ Frontend para aplicación de gestión de tareas inspirada en Todoist | React + T
 - Typescript
 - CSS
 
-
+## Scripts
+- `dev` -> Ejecuta el proyecto
+- 
 
 
 
