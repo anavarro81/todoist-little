@@ -1,17 +1,25 @@
 interface AvatarProps {
   color: string
-  radius: number
+  radius: string
   name: string
 }
 
 const Avatar = ({color, radius, name}: AvatarProps) => {
   return (
-    
-    
-    <div>
-      
-    </div>
 
+
+    <div
+      className="avatar"
+      style={{
+        backgroundColor: color,
+        borderRadius: radius,
+      }}
+    >
+      {name}
+    </div>
+    
+    
+    
 
   )
 }
