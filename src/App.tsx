@@ -1,7 +1,10 @@
 import "./App.css";
-import UserMenu from "./components/UserMenu/UserMenu";
+import SideBarHeader from "./components/SideBarHeader/SideBarHeader";
 function App() {
-  return <UserMenu name={"Antonio"} />;
+  return (
+    <SideBarHeader name={"Antonio"} />
+  )
+  
 }
 
 export default App;
