@@ -1,3 +1,17 @@
 .avatar {
+    padding: 1.5rem 0.9rem;
+    width: 5rem;
+    height: 5rem;
+    color: white;
+    display: flex;    
+    align-items: center;
+    justify-content: center;
+    background-color: #F72585;
+    border-radius: 2.5rem
+    
+}
 
+.avatarinitial {
+    font: bold;
+    font-size: 2.5rem;
 }

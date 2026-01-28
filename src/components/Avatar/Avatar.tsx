@@ -1,22 +1,25 @@
+import avatarStyles from './Avatar.module.css'
+
 interface AvatarProps {
-  color: string
-  radius: string
   name: string
 }
 
-const Avatar = ({color, radius, name}: AvatarProps) => {
+
+
+const Avatar = ({name}: AvatarProps) => {
   return (
 
 
-    <div
-      className="avatar"
-      style={{
-        backgroundColor: color,
-        borderRadius: radius,
-      }}
+    <button
+      className={avatarStyles.avatar}
     >
-      {name}
-    </div>
+
+      <span className={avatarStyles.avatarinitial}>
+        {name.charAt(0).toUpperCase()}
+      </span>
+
+      
+    </button>
     
     
     

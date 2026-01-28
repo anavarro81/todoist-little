@@ -4,7 +4,7 @@ function App() {
   
 
   return (
-    <Avatar color="#F72585" radius={"25px"} name="Antonio"/>      
+    <Avatar name="Antonio"/>      
   )
 }
 
