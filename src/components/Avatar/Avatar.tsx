@@ -10,7 +10,7 @@ const Avatar = ({name}: AvatarProps) => {
   return (
 
 
-    <button
+    <div
       className={avatarStyles.avatar}
     >
 
@@ -19,7 +19,7 @@ const Avatar = ({name}: AvatarProps) => {
       </span>
 
       
-    </button>
+    </div>
     
     
     

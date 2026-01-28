@@ -1,11 +1,7 @@
-import './App.css'
-import Avatar from './components/Avatar/Avatar'
+import "./App.css";
+import UserMenu from "./components/UserMenu/UserMenu";
 function App() {
-  
-
-  return (
-    <Avatar name="Antonio"/>      
-  )
+  return <UserMenu name={"Antonio"} />;
 }
 
-export default App
+export default App;
