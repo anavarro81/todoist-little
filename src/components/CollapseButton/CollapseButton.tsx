@@ -1,7 +1,7 @@
 import Icons from "../Icons";
 
 const CollapseButton = () => {
-  return <div> aaaaa {Icons.collapse}</div>;
+  return <div> {Icons.collapse}</div>;
 };
 
 export default CollapseButton;

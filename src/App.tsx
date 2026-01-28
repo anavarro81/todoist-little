@@ -1,8 +1,9 @@
 import "./App.css";
-import SideBarHeader from "./components/SideBarHeader/SideBarHeader";
+import SideBar from "./components/SideBar/SideBar";
+
 function App() {
   return (
-    <SideBarHeader name={"Antonio"} />
+    <SideBar name={"Antonio"} />
   )
   
 }
