@@ -1,0 +1,17 @@
+.SideBarButton {
+
+    display: flex;
+    justify-content: left;
+    align-items: center;
+
+    gap: 1.1rem;
+    color: white;
+    margin-bottom: 4rem;
+    width: 100%;
+    background-color: var(--main-color);
+    border: 0;
+                                  
+
+
+}
+
