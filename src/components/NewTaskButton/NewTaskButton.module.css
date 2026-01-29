@@ -2,11 +2,33 @@
     background-color: var(--secondary-color);
     
     border-radius: 2rem;
-    padding: 2rem 1.8rem;
+    padding: 1.8rem 2.6rem ;
     display: flex; 
+    flex-direction: column;
     justify-content: left;
-    align-items: center;
+    align-items: start;
     gap: 1rem;
     color: white;
     width: 100%;
 }
+
+/* añadirTarea */
+
+/* Disposición automática */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 18px 26px;
+gap: 10px;
+
+width: 319px;
+height: 61px;
+
+/* Secondary */
+background: #480CA8;
+border-radius: 20px;
+
+/* Auto layout interior */
+flex: none;
+order: 0;
+flex-grow: 0;
