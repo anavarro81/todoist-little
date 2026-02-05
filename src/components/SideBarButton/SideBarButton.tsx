@@ -1,19 +1,25 @@
-import styles from './SideBarButton.module.css'
-
+import styles from "./SideBarButton.module.css";
+import Badge from "../Badge/Badge";
 interface SideBarButtonProps {
-    icon: React.ReactNode,
-    text: string, 
-    onClick: React.MouseEventHandler<HTMLButtonElement>
-    counterBadget?: number
+  icon: React.ReactNode;
+  text: string;
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
+  counterBadget?: number;
 }
 
-const SideBarButton = ({icon, text, onClick}: SideBarButtonProps) => {
+const SideBarButton = ({
+  icon,
+  text,
+  onClick,
+  counterBadget,
+}: SideBarButtonProps) => {
   return (
-    <button className={styles.SideBarButton} onClick={onClick}>    
-        {icon}
-        {text}
+    <button className={styles.SideBarButton} onClick={onClick}>
+      {icon}
+      {text}
+      {counterBadget && <Badge tasksCounter={counterBadget} />}
     </button>
-  )
-}
+  );
+};
 
-export default SideBarButton
+export default SideBarButton;

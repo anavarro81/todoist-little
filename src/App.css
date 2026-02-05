@@ -1,6 +1,12 @@
-.button {
-  font-family: var(--primary-font);
-  font-size: 1.7rem;
-  color: white;
+.app-container {
+  height: 100vh;
+  display: flex;
+}
 
+.main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  overflow: auto;
 }

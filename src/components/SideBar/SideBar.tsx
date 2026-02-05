@@ -2,6 +2,7 @@ import styles from "./SideBar.module.css";
 import SideBarHeader from "../SideBarHeader/SideBarHeader";
 import NewTaskButton from "../NewTaskButton/NewTaskButton";
 import SideBarButton from "../SideBarButton/SideBarButton";
+import ProjectAccordion from '../ProjectAccordion/ProjectAccordion'
 import Icons from "../Icons";
 
 interface SideBarProps {
@@ -43,6 +44,7 @@ const SIDEBARBUTTONS: SideBarItem[] = [
     icon: Icons.message,
     text: "Bandeja de entrada",
     onClick: showInboxTasks,
+    
   },
   {
     id: "today",
@@ -86,6 +88,9 @@ const SideBar = ({ name }: SideBarProps) => {
           counterBadget={button.counterBadget}
         />
       ))}
+
+      <ProjectAccordion/>
+
     </div>
   );
 };

@@ -1,0 +1,92 @@
+.newTaskWindow {
+  background-color: white;
+  padding: 2rem 5.9rem;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 2.2rem;
+  max-width: 94.3rem;
+  width: fit-content;
+  box-sizing: border-box;
+}
+
+.newTaskForm {
+  display: flex;
+  flex-direction: column;
+  gap: 2.9rem;
+}
+
+.newTaskWindow h1 {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 25px;
+  margin: 0;
+}
+
+input {
+  padding: 2.1rem 2.7rem;
+  background-color: #f3f3f3;
+  border-radius: 2rem;
+  border: 0;
+}
+
+input::placeholder {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 17px;
+}
+
+.btnContFristBlock {
+  display: flex;
+  flex-direction: row;
+  gap: 2.1rem;
+  justify-content: space-between;
+}
+
+.btnContFristBlock > button {
+  background-color: var(--secondary-color);
+  color: white;
+  padding: 1.9rem 2.7rem;
+  border-radius: 2rem;
+  border: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+/* Segundo bloque de botones */
+
+.btnContSecondBlock {
+  display: flex;
+  flex-direction: row;
+  gap: 2.1rem;
+  justify-content: space-between;
+}
+
+.btnContSecondBlock button:nth-of-type(-n + 2) {
+  background-color: #f3f3f3;
+  padding: 1.9rem 2.7rem;
+  border-radius: 2rem;
+  border: 0;
+  gap: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.btnContSecondBlock > button:first-of-type {
+  /* Hace el primer botón mas grande que el resto */
+  flex-grow: 1;
+}
+
+.btnContSecondBlock button:nth-child(3) {
+  background-color: var(--main-color);
+  padding: 1.9rem 2.7rem;
+  border-radius: 2rem;
+  border: 0;
+  gap: 1rem;
+  display: flex;
+  align-items: center;
+  color: white;
+}

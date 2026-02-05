@@ -1,7 +1,7 @@
 .sideBar {
-    width: 40.9rem; 
-    height: 100vh;
-    background-color: var(--main-color);
-    padding-left: 4.5rem;
-    padding-right: 4.5rem;
+  width: 40.9rem;
+  background-color: var(--main-color);
+  padding-left: 4.5rem;
+  padding-right: 4.5rem;
+  
 }
