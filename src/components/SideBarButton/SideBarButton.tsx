@@ -15,8 +15,10 @@ const SideBarButton = ({
 }: SideBarButtonProps) => {
   return (
     <button className={styles.SideBarButton} onClick={onClick}>
-      {icon}
-      {text}
+        <div className="SideBarButton">        
+          {icon}
+          {text}
+        </div>      
       {counterBadget && <Badge tasksCounter={counterBadget} />}
     </button>
   );
