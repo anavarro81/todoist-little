@@ -2,8 +2,9 @@ import styles from "./SideBar.module.css";
 import SideBarHeader from "../SideBarHeader/SideBarHeader";
 import NewTaskButton from "../NewTaskButton/NewTaskButton";
 import SideBarButton from "../SideBarButton/SideBarButton";
-import ProjectAccordion from '../ProjectAccordion/ProjectAccordion'
+import ProjectAccordion from "../ProjectAccordion/ProjectAccordion";
 import Icons from "../Icons";
+import { useState } from "react";
 
 interface SideBarProps {
   name: string;
@@ -44,7 +45,6 @@ const SIDEBARBUTTONS: SideBarItem[] = [
     icon: Icons.message,
     text: "Bandeja de entrada",
     onClick: showInboxTasks,
-    
   },
   {
     id: "today",
@@ -69,15 +69,19 @@ const SIDEBARBUTTONS: SideBarItem[] = [
 ];
 
 const SideBar = ({ name }: SideBarProps) => {
+  const [isVisible, setisVisible] = useState(false);
+
+  const showNewTaskWindow = () => {
+    setisVisible((currentState) => !currentState);
+    console.log("isVisible ", isVisible);
+  };
+
   return (
     <div className={styles.sideBar}>
       <SideBarHeader name={name} />
 
-      <NewTaskButton />
+      <NewTaskButton showNewTaskWindow={showNewTaskWindow} />
 
-      {/* {nombres.map((nombre, index) => (
-        <p key={index}>{nombre}</p>   
-      ))} */}
 
       {SIDEBARBUTTONS.map((button) => (
         <SideBarButton
@@ -89,8 +93,7 @@ const SideBar = ({ name }: SideBarProps) => {
         />
       ))}
 
-      <ProjectAccordion/>
-
+      <ProjectAccordion />
     </div>
   );
 };
