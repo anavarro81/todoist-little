@@ -5,6 +5,12 @@ interface DateSelectorProps {
   currentDate: Date;
 }
 
+const data = {
+  todayDay: "Lun",
+  tomorrow: "Mat",
+  mounth: "Febrero",
+};
+
 const DateSelector = ({ currentDate }: DateSelectorProps) => {
   return (
     <>
@@ -22,10 +28,17 @@ const DateSelector = ({ currentDate }: DateSelectorProps) => {
           <div>
             <span>Próxima mes</span> <span>xxx</span>
           </div>
+
+          <div className={styles.datePickerMonthNavigator}>
+            <span>{data.mounth}</span>
+            <div className={styles.datePickerNavButtons}>
+              {Icons.arrowLeft}
+              {Icons.arrowRight}
+            </div>
+          </div>
+          {/* Calendar */}
+          <div></div>
         </div>
-        
-
-
       </div>
       ;
     </>
