@@ -1,0 +1,38 @@
+.container {
+  max-width: 28.7rem;
+  background-color: #f3f3f3;
+  padding: 2.5rem 3.5rem;
+  border-radius: 2rem;
+  gap: 1.7rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* TODO: Quitar cuando tengas lo demas defindo */
+  height: 42.6rem;
+}
+
+.datePickerQuickSelect {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.datePickerQuickSelect > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 3rem;
+}
+
+.datePickerQuickSelect > div > span {
+  font-size: 1.5rem;
+
+}
+
+/* .datePickerQuickOption {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 1rem;
+} */
