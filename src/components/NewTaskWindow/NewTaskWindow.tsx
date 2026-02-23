@@ -1,6 +1,7 @@
 import styles from "./NewTaskWindow.module.css";
-import Icons from "../Icons";
+import { Icons } from "../Icons";
 import { useState } from "react";
+
 interface NewTaskWindowProps {
   isVisible: boolean;
 }
@@ -20,32 +21,32 @@ const NewTaskWindow = () => {
           <input type="text" placeholder="Descripción de la tarea"></input>
           <div className={styles.btnContFristBlock}>
             <button>
-              {Icons.calendar}
+              {<Icons name="Calendar" />}
               <span>Fecha</span>
-              {Icons.chevron}
+              {<Icons name="Chevron" />}
             </button>
             <button>
-              {Icons.priority}
+              {<Icons name="Priority" />}
               Prioridad
-              {Icons.chevron}
+              {<Icons name="Chevron" />}
             </button>
             <button>
-              {Icons.label}
+              {<Icons name="Label" />}
               Etiqueta
-              {Icons.chevron}
+              {<Icons name="Chevron" />}
             </button>
           </div>
           <div className={styles.btnContSecondBlock}>
             <button>
-              {Icons.proyect}
+              {<Icons name="Project" />}
               <span>Asignar proyecto </span>
             </button>
             <button onClick={() => setIsVisible(false)}>
-              {Icons.cancel}
+              {<Icons name="Cancel" />}
               <span>Cancelar </span>
             </button>
             <button>
-              {Icons.add}
+              {<Icons name="Add" />}
               Añadir tarea
             </button>
           </div>

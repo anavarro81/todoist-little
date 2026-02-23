@@ -3,7 +3,7 @@ import SideBarHeader from "../SideBarHeader/SideBarHeader";
 import NewTaskButton from "../NewTaskButton/NewTaskButton";
 import SideBarButton from "../SideBarButton/SideBarButton";
 import ProjectAccordion from "../ProjectAccordion/ProjectAccordion";
-import Icons from "../Icons";
+import { Icons } from "../Icons";
 import { useState } from "react";
 
 interface SideBarProps {
@@ -39,30 +39,35 @@ const showTagsScreen: React.MouseEventHandler<HTMLButtonElement> = () => {
 };
 
 const SIDEBARBUTTONS: SideBarItem[] = [
-  { id: "search", icon: Icons.search, text: "Buscador", onClick: toggleSearch },
+  {
+    id: "search",
+    icon: <Icons name="Search" />,
+    text: "Buscador",
+    onClick: toggleSearch,
+  },
   {
     id: "inbox",
-    icon: Icons.message,
+    icon: <Icons name="Message" />,
     text: "Bandeja de entrada",
     onClick: showInboxTasks,
   },
   {
     id: "today",
-    icon: Icons.today,
+    icon: <Icons name="Today" />,
     text: "Hoy",
     onClick: showTodayTask,
     counterBadget: Math.floor(Math.random() * 10) + 1,
   },
   {
     id: "upcoming",
-    icon: Icons.upcoming,
+    icon: <Icons name="Upcoming" />,
     text: "Próximo",
     onClick: showUpComingTask,
     counterBadget: Math.floor(Math.random() * 10) + 1,
   },
   {
     id: "labels",
-    icon: Icons.label,
+    icon: <Icons name="Label" />,
     text: "Etiquetas",
     onClick: showTagsScreen,
   },
@@ -81,7 +86,6 @@ const SideBar = ({ name }: SideBarProps) => {
       <SideBarHeader name={name} />
 
       <NewTaskButton showNewTaskWindow={showNewTaskWindow} />
-
 
       {SIDEBARBUTTONS.map((button) => (
         <SideBarButton

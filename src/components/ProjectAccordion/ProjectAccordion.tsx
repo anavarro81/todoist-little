@@ -1,17 +1,13 @@
-
-import styles from "./ProjectAccordion.module.css"
-import Icons from "../Icons"
-
+import styles from "./ProjectAccordion.module.css";
+import { Icons } from "../Icons";
 
 const ProjectAccordion = () => {
   return (
-    <button className={styles.projectAccordion} >
+    <button className={styles.projectAccordion}>
       <span>Mis Proyectos</span>
-      {Icons.add}
-      
+      {<Icons name="Add" />}
     </button>
+  );
+};
 
-  )
-}
-
-export default ProjectAccordion
+export default ProjectAccordion;

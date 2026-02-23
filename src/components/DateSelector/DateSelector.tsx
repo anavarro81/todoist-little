@@ -1,5 +1,5 @@
 import styles from "./DateSelector.module.css";
-import Icons from "../Icons";
+import { Icons } from "../Icons";
 
 interface DateSelectorProps {
   currentDate: Date;
@@ -32,8 +32,8 @@ const DateSelector = ({ currentDate }: DateSelectorProps) => {
           <div className={styles.datePickerMonthNavigator}>
             <span>{data.mounth}</span>
             <div className={styles.datePickerNavButtons}>
-              {Icons.arrowLeft}
-              {Icons.arrowRight}
+              {<Icons name="ArrowLeft" />}
+              {<Icons name="ArrowRight" />}
             </div>
           </div>
           {/* Calendar */}
