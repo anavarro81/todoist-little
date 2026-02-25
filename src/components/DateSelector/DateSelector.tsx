@@ -33,9 +33,11 @@ const monthsOfYear = [
   "Diciembre",
 ];
 
-const getDayOfWeek = (day: number): string => {
-  console.log("day ", day);
+interface DateSelectorProps {
+  handleTaskForm: (name: string, value: Date | null) => void;
+}
 
+const getDayOfWeek = (day: number): string => {
   return daysOfWeek[day].slice(0, 3);
 };
 
@@ -43,7 +45,7 @@ const getMonthName = (month: number): string => {
   return monthsOfYear[month].slice(0, 3);
 };
 
-const DateSelector = () => {
+const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
   const [dates, setDates] = useState<DateState>({
     today: new Date(),
     tomorrow: new Date(),
@@ -72,11 +74,17 @@ const DateSelector = () => {
     <>
       <div className={styles.container}>
         <div className={styles.datePickerQuickSelect}>
-          <button>
+          <button
+            type="button"
+            onClick={() => handleTaskForm("dueDate", dates.today)}
+          >
             <span>Hoy</span> <span>{getDayOfWeek(dates.today.getDay())}</span>
           </button>
-          <button>
-            <span>Mañana</span>{" "}
+          <button
+            type="button"
+            onClick={() => handleTaskForm("dueDate", dates.tomorrow)}
+          >
+            <span>Mañana</span>
             <span>{getDayOfWeek(dates.tomorrow.getDay())}</span>
           </button>
           <button>

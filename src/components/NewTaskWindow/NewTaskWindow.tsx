@@ -7,14 +7,38 @@ interface NewTaskWindowProps {
   isVisible: boolean;
 }
 
+interface ITask {
+  name: string;
+  description: string;
+  dueDate: Date | null;
+  label: string[];
+  proyect: string;
+}
+
+const initialTaskForm = {
+  name: "",
+  description: "",
+  dueDate: null,
+  label: [],
+  proyect: "",
+};
+
 const NewTaskWindow = () => {
   const [isVisible, setIsVisible] = useState(true);
 
   const [isVisibleDateSelector, setIsVisibeDateSelector] = useState(true);
 
+  const [formTask, setFormTask] = useState<ITask>(initialTaskForm);
+
+  const handleTaskForm = (name: string, value: any) => {
+    console.log("name: ", name);
+    console.log("value: ", value);
+
+    setFormTask((prev) => ({ ...prev, [name]: value }));
+  };
+
   const toggleDateSelector = () => {
     setIsVisibeDateSelector(!isVisibleDateSelector);
-    console.log("hice click... ");
   };
 
   return (
@@ -38,7 +62,9 @@ const NewTaskWindow = () => {
                 <span>Fecha</span>
                 {<Icons name="Chevron" />}
               </button>
-              {isVisibleDateSelector && <DateSelector />}
+              {isVisibleDateSelector && (
+                <DateSelector handleTaskForm={handleTaskForm} />
+              )}
               <button>
                 {<Icons name="Priority" />}
                 Prioridad
