@@ -9,6 +9,9 @@
   align-items: center;
   /* TODO: Quitar cuando tengas lo demas defindo */
   height: 42.6rem;
+  position: absolute;
+  /* Lo posiciona justo debajo del contenedor padre */
+  top: 100%; 
 }
 
 .datePickerQuickSelect {
@@ -18,15 +21,16 @@
   gap: 1.1rem;
 }
 
-.datePickerQuickSelect > div {
+.datePickerQuickSelect > button {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   gap: 3rem;
   margin-bottom: 1.7rem;
+  border: 0;
 }
 
-.datePickerQuickSelect > div > span {
+.datePickerQuickSelect > button > span {
   font-size: 1.5rem;
 }
 
@@ -41,7 +45,6 @@
   flex-direction: row;
   gap: 1.2rem;
 }
-
 
 .datePickerCalendarGrid {
   display: grid;

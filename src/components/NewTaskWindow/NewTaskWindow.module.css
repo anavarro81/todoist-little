@@ -42,6 +42,7 @@ input::placeholder {
   flex-direction: row;
   gap: 2.1rem;
   justify-content: space-between;
+  position: relative;
 }
 
 .btnContFristBlock > button {

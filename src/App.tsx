@@ -1,7 +1,7 @@
 import "./App.css";
 import SideBar from "./components/SideBar/SideBar";
 import NewTaskWindow from "./components/NewTaskWindow/NewTaskWindow";
-import DateSelector from "./components/DateSelector/DateSelector";
+
 //import { useState, useEffect } from "react";
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
         <div className="main-container">
           <NewTaskWindow />;
         </div>
-        <DateSelector currentDate={currentDay}/>
+        
       </div>
     </>
   );
