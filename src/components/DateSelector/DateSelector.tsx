@@ -1,49 +1,14 @@
 import styles from "./DateSelector.module.css";
 import { Icons } from "../Icons";
 import { useState, useEffect } from "react";
+import {getDayOfWeek, getMonthName} from '../../utils/dateUtils'
+import type {DateState} from '../../utils/dateUtils'
 
-interface DateState {
-  today: Date;
-  tomorrow: Date;
-  nextWeek: Date;
-  nextMonth: Date;
-}
-
-const daysOfWeek = [
-  "Domingo",
-  "Lunes",
-  "Martes",
-  "Miércoles",
-  "Jueves",
-  "Viernes",
-  "Sábado",
-];
-const monthsOfYear = [
-  "Enero",
-  "Febrero",
-  "Marzo",
-  "Abril",
-  "Mayo",
-  "Junio",
-  "Julio",
-  "Agosto",
-  "Septiembre",
-  "Octubre",
-  "Noviembre",
-  "Diciembre",
-];
 
 interface DateSelectorProps {
   handleTaskForm: (name: string, value: Date | null) => void;
 }
 
-const getDayOfWeek = (day: number): string => {
-  return daysOfWeek[day].slice(0, 3);
-};
-
-const getMonthName = (month: number): string => {
-  return monthsOfYear[month].slice(0, 3);
-};
 
 const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
   const [dates, setDates] = useState<DateState>({
@@ -87,12 +52,18 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
             <span>Mañana</span>
             <span>{getDayOfWeek(dates.tomorrow.getDay())}</span>
           </button>
-          <button>
-            <span>Próxima semana</span>{" "}
+          <button
+            type="button"
+            onClick={() => handleTaskForm("dueDate", dates.nextWeek)}
+            >
+            <span>Próxima semana</span>
             <span>{getDayOfWeek(dates.nextWeek.getDay())}</span>
           </button>
-          <button>
-            <span>Próxima mes</span>{" "}
+          <button
+            type="button"
+            onClick={() => handleTaskForm("dueDate", dates.nextMonth)}
+          >
+            <span>Próxima mes</span>
             <span>{getDayOfWeek(dates.nextMonth.getDay())}</span>
           </button>
 
