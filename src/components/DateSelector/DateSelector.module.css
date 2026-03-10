@@ -51,6 +51,15 @@
   gap: 1.2rem;
 }
 
+.datePickerNavButtons > button {
+  border: 0;
+  cursor: pointer;
+}
+
+.datePickerNavButtons > button:hover {
+  background-color: #cccccc;
+}
+
 .datePickerCalendarGrid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);

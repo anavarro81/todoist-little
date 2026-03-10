@@ -12,6 +12,7 @@ import Priority from "../assets/icons/Priority.tsx";
 import Cancel from "../assets/icons/Cancel.tsx";
 import ArrowLeft from "../assets/icons/ArrowLeft.tsx";
 import ArrowRight from "../assets/icons/ArrowRight.tsx";
+import Circle from "../assets/icons/Circle.tsx";
 
 const icons = {
   Chevron: Chevron,
@@ -28,6 +29,7 @@ const icons = {
   Cancel: Cancel,
   ArrowLeft: ArrowLeft,
   ArrowRight: ArrowRight,
+  Circle: Circle
 };
 
 type IconName = keyof typeof icons;

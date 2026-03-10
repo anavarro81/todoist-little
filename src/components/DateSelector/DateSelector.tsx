@@ -97,6 +97,9 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
               <button type="button" onClick={() => changeMonth(-1)}>
                 {<Icons name="ArrowLeft" />}
               </button>
+
+              <button>{<Icons name="Circle" />}</button>
+
               <button type="button" onClick={() => changeMonth(1)}>
                 {<Icons name="ArrowRight" />}
               </button>
