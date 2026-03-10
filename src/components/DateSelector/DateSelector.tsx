@@ -34,8 +34,6 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
     tomorrow.setDate(tomorrow.getDate() + 1);
     nextWeek.setDate(nextWeek.getDate() + 7);
 
-    console.log("today is ", today);
-
     setDates({
       today: today,
       tomorrow: tomorrow,
@@ -45,18 +43,23 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
     });
   }, []);
 
+  const goToday = () => {
+    setDates((prev) => ({ ...prev, today: new Date() }));
+  };
+
   const changeMonth = (offset: number) => {
     // Al hacer return explicito se crea una nueva instancia y se asegura que actualiza la interfaz
+
+
     setViewDate((prev) => {
       const nextViewDate = new Date(
         prev.getFullYear(),
         prev.getMonth() + offset,
         1,
       );
+      setDates({ ...dates, currentMonth: generateMonth(nextViewDate) });
       return nextViewDate;
     });
-
-    setDates({ ...dates, currentMonth: generateMonth(viewDate) });
   };
 
   return (
@@ -98,7 +101,9 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
                 {<Icons name="ArrowLeft" />}
               </button>
 
-              <button>{<Icons name="Circle" />}</button>
+              <button type="button" onClick={() => goToday()}>
+                {<Icons name="Circle" />}
+              </button>
 
               <button type="button" onClick={() => changeMonth(1)}>
                 {<Icons name="ArrowRight" />}

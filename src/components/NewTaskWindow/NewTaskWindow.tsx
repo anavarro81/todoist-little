@@ -31,8 +31,8 @@ const NewTaskWindow = () => {
   const [formTask, setFormTask] = useState<ITask>(initialTaskForm);
 
   const handleTaskForm = (name: string, value: any) => {
-    console.log("name: ", name);
-    console.log("value: ", value);
+    
+    
 
     setFormTask((prev) => ({ ...prev, [name]: value }));
   };

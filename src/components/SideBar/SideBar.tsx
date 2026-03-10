@@ -19,23 +19,23 @@ interface SideBarItem {
 }
 
 const toggleSearch = () => {
-  console.log("click on toggleSearch");
+  
 };
 
 const showInboxTasks = () => {
-  console.log("click on showInboxTasks");
+  
 };
 
 const showTodayTask: React.MouseEventHandler<HTMLButtonElement> = () => {
-  console.log("click on showTodayTask");
+  
 };
 
 const showUpComingTask: React.MouseEventHandler<HTMLButtonElement> = () => {
-  console.log("click on showUpComingTask");
+  
 };
 
 const showTagsScreen: React.MouseEventHandler<HTMLButtonElement> = () => {
-  console.log("click on showTagsScreen");
+  
 };
 
 const SIDEBARBUTTONS: SideBarItem[] = [
@@ -78,7 +78,7 @@ const SideBar = ({ name }: SideBarProps) => {
 
   const showNewTaskWindow = () => {
     setisVisible((currentState) => !currentState);
-    console.log("isVisible ", isVisible);
+    
   };
 
   return (
