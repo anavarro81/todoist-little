@@ -54,5 +54,19 @@
 .datePickerCalendarGrid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 1rem;
+  gap: 2rem;
+}
+
+.datePickerCell {
+  cursor: pointer;
+  color: black;
+  border: 0;
+}
+
+.currentDay {
+  color: green;
+}
+
+.datePickerDisabled {
+  color: #cccccc;
 }
