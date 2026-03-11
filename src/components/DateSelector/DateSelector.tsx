@@ -16,12 +16,21 @@ interface DateSelectorProps {
 }
 
 const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
-  const [dates, setDates] = useState<DateState>({
-    today: new Date(),
-    tomorrow: new Date(),
-    nextWeek: new Date(),
-    nextWeekend: new Date(),
-    currentMonth: [],
+  const [dates, setDates] = useState<DateState>(() => {
+    const today = new Date();
+
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+
+    const nextWeek = new Date(today);
+    nextWeek.setDate(nextWeek.getDate() + 7);
+    return {
+      today,
+      tomorrow,
+      nextWeek,
+      nextWeekend: getNextWeekEnd(today),
+      currentMonth: generateMonth(today),
+    };
   });
 
   const [viewDate, setViewDate] = useState(new Date());
@@ -63,7 +72,7 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
 
       if (month == 12) {
         month = 0;
-      } else if (month == -1){        
+      } else if (month == -1) {
         month = 11;
       }
 
