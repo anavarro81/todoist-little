@@ -52,8 +52,8 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
     });
   }, []);
 
-  const goToday = () => {
-    setDates((prev) => ({ ...prev, today: new Date() }));
+  const goToCurrentDay = () => {
+    setDates((prev) => ({ ...prev, currentMonth: generateMonth(prev.today) }));
   };
 
   const changeMonth = (offset: number) => {
@@ -121,7 +121,7 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
                 {<Icons name="ArrowLeft" />}
               </button>
 
-              <button type="button" onClick={() => goToday()}>
+              <button type="button" onClick={() => goToCurrentDay()}>
                 {<Icons name="Circle" />}
               </button>
 
