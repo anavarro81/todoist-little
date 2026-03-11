@@ -25,7 +25,7 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
   });
 
   const [viewDate, setViewDate] = useState(new Date());
-  const [viewMonth, setViewMonth] = useState(new Date().getMonth());
+  const [viewMonth, setViewMonth] = useState(dates.today.getMonth());
 
   useEffect(() => {
     let today = new Date();
@@ -50,14 +50,25 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
   const changeMonth = (offset: number) => {
     // Al hacer return explicito se crea una nueva instancia y se asegura que actualiza la interfaz
 
-
     setViewDate((prev) => {
       const nextViewDate = new Date(
         prev.getFullYear(),
         prev.getMonth() + offset,
         1,
       );
+
       setDates({ ...dates, currentMonth: generateMonth(nextViewDate) });
+
+      let month = viewMonth + offset;
+
+      if (month == 12) {
+        month = 0;
+      } else if (month == -1){        
+        month = 11;
+      }
+
+      setViewMonth(month);
+
       return nextViewDate;
     });
   };
@@ -95,7 +106,7 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
           </button>
 
           <div className={styles.datePickerMonthNavigator}>
-            <span>{getMonthName(dates.today.getMonth())}</span>
+            <span>{getMonthName(viewMonth)}</span>
             <div className={styles.datePickerNavButtons}>
               <button type="button" onClick={() => changeMonth(-1)}>
                 {<Icons name="ArrowLeft" />}

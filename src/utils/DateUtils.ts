@@ -53,6 +53,7 @@ export const getDayOfWeek = (day: number): string => {
 };
 
 export const getMonthName = (month: number): string => {
+  console.log("month ", month);
   return monthsOfYear[month].slice(0, 3);
 };
 
