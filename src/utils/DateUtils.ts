@@ -3,7 +3,7 @@ export interface DateState {
   tomorrow: Date;
   nextWeek: Date;
   nextWeekend: Date;
-  currentMonth: daysOfMonth[];
+  monthGrid: daysOfMonth[];
 }
 
 export interface daysOfMonth {
@@ -53,7 +53,6 @@ export const getDayOfWeek = (day: number): string => {
 };
 
 export const getMonthName = (month: number): string => {
-  console.log("month ", month);
   return monthsOfYear[month].slice(0, 3);
 };
 
@@ -90,8 +89,6 @@ export const getLastDay = (date: Date): number => {
 // Genera los dias del mes a partir de la semana del dia acutal.
 // Por ejemplo si hoy fuese cuatro (miercoles), empieza a generar desde el 2 lunes hasta el final del mes.
 export const generateMonth = (date: Date): daysOfMonth[] => {
-  console.log("date ", date);
-
   const firstDay = getMonday(date);
   const lastDay = getLastDay(date);
   const currentDay = date.getDate();
@@ -117,8 +114,6 @@ export const generateMonth = (date: Date): daysOfMonth[] => {
 
     daysOfMonth.push({ day: i, isDisable, isCurrentDay, isVisible });
   }
-
-  console.table(daysOfMonth);
 
   return daysOfMonth;
 };

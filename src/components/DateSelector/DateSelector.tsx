@@ -9,7 +9,7 @@ import {
   generateMonth,
   getNextWeekEnd,
 } from "../../utils/DateUtils";
-import type { DateState, daysOfMonth } from "../../utils/DateUtils";
+import type { DateState } from "../../utils/DateUtils";
 
 interface DateSelectorProps {
   handleTaskForm: (name: string, value: Date | null) => void;
@@ -24,12 +24,13 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
 
     const nextWeek = new Date(today);
     nextWeek.setDate(nextWeek.getDate() + 7);
+
     return {
       today,
       tomorrow,
       nextWeek,
       nextWeekend: getNextWeekEnd(today),
-      currentMonth: generateMonth(today),
+      monthGrid: generateMonth(today),
     };
   });
 
@@ -48,35 +49,35 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
       tomorrow: tomorrow,
       nextWeek: nextWeek,
       nextWeekend: getNextWeekEnd(today),
-      currentMonth: generateMonth(today),
+      monthGrid: generateMonth(today),
     });
   }, []);
 
   const goToCurrentDay = () => {
-    setDates((prev) => ({ ...prev, currentMonth: generateMonth(prev.today) }));
+    setDates((prev) => ({ ...prev, monthGrid: generateMonth(dates.today) }));
+    setViewMonth(dates.today.getMonth());
   };
 
   const changeMonth = (offset: number) => {
     // Al hacer return explicito se crea una nueva instancia y se asegura que actualiza la interfaz
 
     setViewDate((prev) => {
-      const nextViewDate = new Date(
-        prev.getFullYear(),
-        prev.getMonth() + offset,
-        1,
-      );
+      let nextViewDate;
 
-      setDates({ ...dates, currentMonth: generateMonth(nextViewDate) });
-
-      let month = viewMonth + offset;
-
-      if (month == 12) {
-        month = 0;
-      } else if (month == -1) {
-        month = 11;
+      if (prev.getMonth() == dates.today.getMonth() + 1 && offset == -1) {
+        nextViewDate = dates.today;
+      } else {
+        nextViewDate = new Date(
+          prev.getFullYear(),
+          prev.getMonth() + offset,
+          1,
+        );
       }
 
-      setViewMonth(month);
+      // Genero el calendario a partir de la fecha de vista correspondiente
+      setDates({ ...dates, monthGrid: generateMonth(nextViewDate) });
+
+      setViewMonth(nextViewDate.getMonth());
 
       return nextViewDate;
     });
@@ -117,7 +118,12 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
           <div className={styles.datePickerMonthNavigator}>
             <span>{getMonthName(viewMonth)}</span>
             <div className={styles.datePickerNavButtons}>
-              <button type="button" onClick={() => changeMonth(-1)}>
+              <button
+                type="button"
+                onClick={() => changeMonth(-1)}
+                disabled={viewMonth == dates.today.getMonth()}
+                className={styles.disabled}
+              >
                 {<Icons name="ArrowLeft" />}
               </button>
 
@@ -139,7 +145,7 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
                 </>
               );
             })}
-            {dates.currentMonth.map((day) => {
+            {dates.monthGrid.map((day) => {
               return (
                 <>
                   <button
