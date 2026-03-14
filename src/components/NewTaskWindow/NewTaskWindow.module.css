@@ -9,6 +9,7 @@
   max-width: 94.3rem;
   width: fit-content;
   box-sizing: border-box;
+  margin-top: 100px;
 }
 
 .newTaskForm {
