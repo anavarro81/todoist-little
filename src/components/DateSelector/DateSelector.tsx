@@ -124,7 +124,14 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
                 disabled={viewMonth == dates.today.getMonth()}
                 className={styles.disabled}
               >
-                {<Icons name="ArrowLeft" />}
+                {
+                  <Icons
+                    name="ArrowLeft"
+                    fill={
+                      viewMonth == dates.today.getMonth() ? "#cccccc" : "black"
+                    }
+                  />
+                }
               </button>
 
               <button type="button" onClick={() => goToCurrentDay()}>
@@ -161,6 +168,11 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
                 </>
               );
             })}
+          </div>
+          {/* Hora*/}
+          <div className={styles.bottonButtonContainer}>
+            <button className={styles.blueButton}> Hora </button>
+            <button className={styles.blueButton}> Repetir </button>
           </div>
         </div>
       </div>

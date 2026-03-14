@@ -29,7 +29,7 @@ const icons = {
   Cancel: Cancel,
   ArrowLeft: ArrowLeft,
   ArrowRight: ArrowRight,
-  Circle: Circle
+  Circle: Circle,
 };
 
 type IconName = keyof typeof icons;
@@ -38,6 +38,9 @@ export const Icons = ({
   name,
   ...props
 }: { name: IconName } & React.SVGProps<SVGSVGElement>) => {
+  console.log("name ", name);
+  console.log("props ", props);
+
   const Component = icons[name];
   return <Component {...props} />;
 };

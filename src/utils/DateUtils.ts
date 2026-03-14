@@ -92,6 +92,11 @@ export const generateMonth = (date: Date): daysOfMonth[] => {
   const firstDay = getMonday(date);
   const lastDay = getLastDay(date);
   const currentDay = date.getDate();
+  let isCurrentMonth;
+
+  if (date.getMonth() == new Date().getMonth()) {
+    isCurrentMonth = true;
+  }
 
   let daysOfMonth = [];
 
@@ -101,11 +106,12 @@ export const generateMonth = (date: Date): daysOfMonth[] => {
     let isDisable = false;
     let isVisible = true;
 
-    if (i < currentDay) {
-      isDisable = true;
+    if (isCurrentMonth) {
+      if (i < currentDay) {
+        isDisable = true;
+      }
+      isCurrentDay = i == currentDay;
     }
-
-    isCurrentDay = i == currentDay;
 
     // Los dias del mes anterior no se muestran.
     if (i < 1) {
