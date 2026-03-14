@@ -11,6 +11,8 @@ import {
 } from "../../utils/DateUtils";
 import type { DateState } from "../../utils/DateUtils";
 
+import HourSelector from "../HourSelector/HourSelector";
+
 interface DateSelectorProps {
   handleTaskForm: (name: string, value: Date | null) => void;
 }
@@ -172,6 +174,7 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
           {/* Hora*/}
           <div className={styles.bottonButtonContainer}>
             <button className={styles.blueButton}> Hora </button>
+            <HourSelector />
             <button className={styles.blueButton}> Repetir </button>
           </div>
         </div>

@@ -1,0 +1,13 @@
+.container {
+  max-width: 28.7rem;
+  background-color: #f3f3f3;
+  padding: 2.5rem 1rem;
+  border-radius: 2rem;
+  gap: 1.7rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  bottom: 100%;
+  border: 1px solid black;
+}
