@@ -5,17 +5,15 @@ import NewTaskWindow from "./components/NewTaskWindow/NewTaskWindow";
 //import { useState, useEffect } from "react";
 
 function App() {
-  
-  const currentDay = new Date()
+  const currentDay = new Date();
 
   return (
     <>
       <div className="app-container">
-        <SideBar name={"Antonio"} />
+        {/* <SideBar name={"Antonio"} /> */}
         <div className="main-container">
           <NewTaskWindow />;
         </div>
-        
       </div>
     </>
   );

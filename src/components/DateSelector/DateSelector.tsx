@@ -11,13 +11,15 @@ import {
 } from "../../utils/DateUtils";
 import type { DateState } from "../../utils/DateUtils";
 
-import HourSelector from "../HourSelector/HourSelector";
+import { useRef } from "react";
 
 interface DateSelectorProps {
   handleTaskForm: (name: string, value: Date | null) => void;
 }
 
 const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
+  const inputRef = useRef<HTMLInputElement | null>(null);
+
   const [dates, setDates] = useState<DateState>(() => {
     const today = new Date();
 
@@ -38,6 +40,14 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
 
   const [viewDate, setViewDate] = useState(new Date());
   const [viewMonth, setViewMonth] = useState(dates.today.getMonth());
+
+  const [showHourSelector, setShowHourSelector] = useState(false);
+
+  const [hour, setHour] = useState("11:30");
+
+  const validateHour = (e: any) => {
+    setHour(e.target.value);
+  };
 
   useEffect(() => {
     let today = new Date();
@@ -173,8 +183,55 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
           </div>
           {/* Hora*/}
           <div className={styles.bottonButtonContainer}>
-            <button className={styles.blueButton}> Hora </button>
-            <HourSelector />
+            {!showHourSelector && (
+              <>
+                <button
+                  type="button"
+                  className={styles.timeButtonContainer}
+                  onClick={() => setShowHourSelector(!showHourSelector)}
+                >
+                  <div className={styles.timeButtonClock}>
+                    <Icons name="Clock" />
+                    <span>Hora</span>
+                  </div>
+                  <Icons name="Chevron" fill="black" />
+                </button>
+              </>
+            )}
+
+            {showHourSelector && (
+              <>
+                <div className={styles.timeButtonContainer} id="input-hora">
+                  <Icons name="Clock" />
+                  <input
+                    type="text"
+                    value={hour}
+                    onChange={validateHour}
+                    ref={inputRef}
+                  />
+                  <button>
+                    <Icons name="Cancel" />
+                  </button>
+                </div>
+
+                <div className={styles.hourSelector}>
+                  <ul>
+                    <li>13:00</li>
+                    <li>13:30</li>
+                    <li>14:00</li>
+                    <li>14:30</li>
+                    <li>13:00</li>
+                    <li>13:30</li>
+                    <li>14:00</li>
+                    <li>14:30</li>
+                    <li>13:00</li>
+                    <li>13:30</li>
+                    <li>14:00</li>
+                    <li>14:30</li>
+                  </ul>
+                </div>
+              </>
+            )}
             <button className={styles.blueButton}> Repetir </button>
           </div>
         </div>

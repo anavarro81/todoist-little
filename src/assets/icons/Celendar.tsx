@@ -20,7 +20,6 @@ const Celendar = (props: React.SVGProps<SVGSVGElement>) => {
       />
       <path
         d="M16 3V7"
-        stroke="white"
         stroke-width="2"
         stroke-linecap="round"
         stroke-linejoin="round"

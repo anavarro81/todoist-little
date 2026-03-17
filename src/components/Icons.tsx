@@ -13,6 +13,7 @@ import Cancel from "../assets/icons/Cancel.tsx";
 import ArrowLeft from "../assets/icons/ArrowLeft.tsx";
 import ArrowRight from "../assets/icons/ArrowRight.tsx";
 import Circle from "../assets/icons/Circle.tsx";
+import Clock from "../assets/icons/clock.tsx";
 
 const icons = {
   Chevron: Chevron,
@@ -30,6 +31,7 @@ const icons = {
   ArrowLeft: ArrowLeft,
   ArrowRight: ArrowRight,
   Circle: Circle,
+  Clock: Clock,
 };
 
 type IconName = keyof typeof icons;
@@ -38,8 +40,8 @@ export const Icons = ({
   name,
   ...props
 }: { name: IconName } & React.SVGProps<SVGSVGElement>) => {
-  console.log("name ", name);
-  console.log("props ", props);
+  
+  
 
   const Component = icons[name];
   return <Component {...props} />;
