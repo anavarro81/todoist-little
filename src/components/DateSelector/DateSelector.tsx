@@ -45,8 +45,21 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
 
   const [hour, setHour] = useState("11:30");
 
+  const [isHourValid, setIsHourValid] = useState(true);
+
   const validateHour = (e: any) => {
-    setHour(e.target.value);
+    const value = e.target.value;
+    setHour(value);
+
+    // Consider empty value as valid (no tooltip)
+    if (value === "") {
+      setIsHourValid(true);
+      return;
+    }
+
+    // Validate format HH:MM (24-hour)
+    const isValid = /^([01]?\d|2[0-3]):([0-5]\d)$/.test(value);
+    setIsHourValid(isValid);
   };
 
   useEffect(() => {
@@ -202,12 +215,28 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
             {showHourSelector && (
               <>
                 <div className={styles.timeButtonContainer} id="input-hora">
+                  {/* Tooltip shown above input when hour is invalid */}
+                  {!isHourValid && hour !== "" && (
+                    <div
+                      id="hora-invalid-tooltip"
+                      className={styles.tooltip}
+                      role="alert"
+                      aria-live="polite"
+                    >
+                      hora no valida
+                    </div>
+                  )}
+
                   <Icons name="Clock" />
                   <input
                     type="text"
                     value={hour}
                     onChange={validateHour}
                     ref={inputRef}
+                    aria-invalid={!isHourValid}
+                    aria-describedby={
+                      !isHourValid ? "hora-invalid-tooltip" : undefined
+                    }
                   />
                   <button>
                     <Icons name="Cancel" />

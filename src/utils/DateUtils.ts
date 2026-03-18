@@ -123,3 +123,10 @@ export const generateMonth = (date: Date): daysOfMonth[] => {
 
   return daysOfMonth;
 };
+
+export const generateHours = () => {
+
+ // Generar horas: De 1 a 23. Se rellena con ceros < 10
+ // Generar minutos: Puede valer: 00, 15, 30, 45. 
+
+}
