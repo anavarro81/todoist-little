@@ -48,6 +48,8 @@ export const monthsOfYear = [
   "Diciembre",
 ];
 
+const minutesValues = ["00", "30"];
+
 export const getDayOfWeek = (day: number): string => {
   return daysOfWeek[day].slice(0, 3);
 };
@@ -98,7 +100,7 @@ export const generateMonth = (date: Date): daysOfMonth[] => {
     isCurrentMonth = true;
   }
 
-  let daysOfMonth = [];
+  const daysOfMonth = [];
 
   let isCurrentDay = false;
 
@@ -125,8 +127,16 @@ export const generateMonth = (date: Date): daysOfMonth[] => {
 };
 
 export const generateHours = () => {
+  // Generar horas: De las 00 a las 23:30 en bloques de 30 minutos.
+  const hours = [];
 
- // Generar horas: De 1 a 23. Se rellena con ceros < 10
- // Generar minutos: Puede valer: 00, 15, 30, 45. 
+  for (let hourIndex = 0; hourIndex < 24; hourIndex++) {
+    const hour = hourIndex.toString().padStart(2, "0");
 
-}
+    for (const min of minutesValues) {
+      hours.push(hour + ":" + min);
+    }
+  }
+
+  return hours;
+};

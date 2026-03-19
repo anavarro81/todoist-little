@@ -8,18 +8,15 @@ import {
   daysOfWeekMon,
   generateMonth,
   getNextWeekEnd,
+  generateHours,
 } from "../../utils/DateUtils";
 import type { DateState } from "../../utils/DateUtils";
-
-import { useRef } from "react";
 
 interface DateSelectorProps {
   handleTaskForm: (name: string, value: Date | null) => void;
 }
 
 const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
-  const inputRef = useRef<HTMLInputElement | null>(null);
-
   const [dates, setDates] = useState<DateState>(() => {
     const today = new Date();
 
@@ -44,6 +41,7 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
   const [showHourSelector, setShowHourSelector] = useState(false);
 
   const [hour, setHour] = useState("11:30");
+  const [hoursSelector, setHoursSelector] = useState<string[]>([]);
 
   const [isHourValid, setIsHourValid] = useState(true);
 
@@ -63,11 +61,13 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
   };
 
   useEffect(() => {
-    let today = new Date();
-    let tomorrow = new Date();
-    let nextWeek = new Date();
+    const today = new Date();
+    const tomorrow = new Date();
+    const nextWeek = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1);
     nextWeek.setDate(nextWeek.getDate() + 7);
+
+    setHoursSelector(generateHours());
 
     setDates({
       today: today,
@@ -232,7 +232,6 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
                     type="text"
                     value={hour}
                     onChange={validateHour}
-                    ref={inputRef}
                     aria-invalid={!isHourValid}
                     aria-describedby={
                       !isHourValid ? "hora-invalid-tooltip" : undefined
@@ -245,18 +244,9 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
 
                 <div className={styles.hourSelector}>
                   <ul>
-                    <li>13:00</li>
-                    <li>13:30</li>
-                    <li>14:00</li>
-                    <li>14:30</li>
-                    <li>13:00</li>
-                    <li>13:30</li>
-                    <li>14:00</li>
-                    <li>14:30</li>
-                    <li>13:00</li>
-                    <li>13:30</li>
-                    <li>14:00</li>
-                    <li>14:30</li>
+                    {hoursSelector.map((hour) => (
+                      <li> {hour} </li>
+                    ))}
                   </ul>
                 </div>
               </>
