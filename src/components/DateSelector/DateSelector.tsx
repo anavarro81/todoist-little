@@ -251,9 +251,18 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
                 {showListOfHour && (
                   <div className={styles.hourSelector}>
                     <ul>
-                      {hoursSelector.map((hour: string) => (
-                        <li key={hour}> {hour} </li>
-                      ))}
+                      {hoursSelector.map((hour: string, index: number) => {
+                        if (index === 0) {
+                          return (
+                            <li key={hour} className={styles.listHourSelected}>
+                              {hour}
+                              <Icons name="Check" fill="#4895ef" />
+                            </li>
+                          );
+                        }
+
+                        return <li key={hour}> {hour} </li>;
+                      })}
                     </ul>
                   </div>
                 )}
@@ -263,7 +272,7 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
           </div>
         </div>
       </div>
-      ;
+      <Icons name="Check" />
     </>
   );
 };

@@ -12,6 +12,15 @@
   top: 100%;
 }
 
+.listHourSelected {
+  display: flex;
+  justify-content: space-between;
+  color: var(--main-color);
+  align-items: center;
+  margin-left: 4px;
+  margin-right: 4px;
+}
+
 .datePickerQuickSelect {
   display: flex;
   justify-content: center;
