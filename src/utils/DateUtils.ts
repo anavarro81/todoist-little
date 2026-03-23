@@ -48,8 +48,6 @@ export const monthsOfYear = [
   "Diciembre",
 ];
 
-const minutesValues = ["00", "30"];
-
 export const getDayOfWeek = (day: number): string => {
   return daysOfWeek[day].slice(0, 3);
 };
@@ -127,15 +125,40 @@ export const generateMonth = (date: Date): daysOfMonth[] => {
 };
 
 export const generateHours = () => {
-  // Generar horas: De las 00 a las 23:30 en bloques de 30 minutos.
+  const today = new Date();
+  const finalHour = new Date();
+  finalHour.setHours(23, 30, 0, 0);
+
+  console.log("Hora final ==> ", finalHour.toLocaleTimeString());
+
+  const ADD_MINUTES = 30;
   const hours = [];
 
-  for (let hourIndex = 0; hourIndex < 24; hourIndex++) {
-    const hour = hourIndex.toString().padStart(2, "0");
+  let minutes = today.getMinutes();
+  let hour = today.getHours();
 
-    for (const min of minutesValues) {
-      hours.push(hour + ":" + min);
-    }
+  // Calcular hora inicial
+  if (minutes >= 30) {
+    minutes = 0;
+    hour++;
+  } else {
+    minutes = 30;
+  }
+  // Setear hora inicial
+  today.setHours(hour, minutes, 0, 0);
+  hours.push(
+    today.getHours().toString().padStart(2, "0") +
+      ":" +
+      today.getMinutes().toString().padStart(2, "0"),
+  );
+
+  while (today.getTime() < finalHour.getTime()) {
+    today.setTime(today.getTime() + ADD_MINUTES * 60 * 1000);
+    hours.push(
+      today.getHours().toString().padStart(2, "0") +
+        ":" +
+        today.getMinutes().toString().padStart(2, "0"),
+    );
   }
 
   return hours;

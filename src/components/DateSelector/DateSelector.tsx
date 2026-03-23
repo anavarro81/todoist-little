@@ -40,10 +40,12 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
 
   const [showHourSelector, setShowHourSelector] = useState(false);
 
-  const [hour, setHour] = useState("11:30");
+  const [hour, setHour] = useState("");
   const [hoursSelector, setHoursSelector] = useState<string[]>([]);
 
   const [isHourValid, setIsHourValid] = useState(true);
+
+  const [showListOfHour, setShowListOfHour] = useState(false);
 
   const validateHour = (e: any) => {
     const value = e.target.value;
@@ -67,7 +69,10 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
     tomorrow.setDate(tomorrow.getDate() + 1);
     nextWeek.setDate(nextWeek.getDate() + 7);
 
-    setHoursSelector(generateHours());
+    const hours = generateHours();
+
+    setHoursSelector(hours);
+    setHour(hours[0]);
 
     setDates({
       today: today,
@@ -232,6 +237,7 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
                     type="text"
                     value={hour}
                     onChange={validateHour}
+                    onClick={() => setShowListOfHour((prev) => !prev)}
                     aria-invalid={!isHourValid}
                     aria-describedby={
                       !isHourValid ? "hora-invalid-tooltip" : undefined
@@ -242,13 +248,15 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
                   </button>
                 </div>
 
-                <div className={styles.hourSelector}>
-                  <ul>
-                    {hoursSelector.map((hour) => (
-                      <li> {hour} </li>
-                    ))}
-                  </ul>
-                </div>
+                {showListOfHour && (
+                  <div className={styles.hourSelector}>
+                    <ul>
+                      {hoursSelector.map((hour: string) => (
+                        <li key={hour}> {hour} </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </>
             )}
             <button className={styles.blueButton}> Repetir </button>
