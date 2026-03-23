@@ -119,7 +119,21 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
     setShowListOfHour((prev) => !prev);
 
     if (inputTimeRef.current) {
-      inputTimeRef.current.setSelectionRange(0, 2);
+      inputTimeRef.current.setSelectionRange(0, 2);      
+    }
+  };
+
+  // Change de focus between hours and minutos
+  const changeFocus = () => {
+    if (inputTimeRef.current) {
+      const start = inputTimeRef.current.selectionStart;
+      const end = inputTimeRef.current.selectionEnd;
+
+      if (start == 3 && end == 5) {
+        inputTimeRef.current.setSelectionRange(0, 2);
+      } else {
+        inputTimeRef.current.setSelectionRange(3, 5);
+      }
     }
   };
 
@@ -127,21 +141,36 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
     switch (e.key) {
       case "ArrowLeft":
         console.log("He pulsado la tecla izquierda");
+        e.preventDefault();
+        changeFocus();
+
         break;
       case "ArrowRight":
         console.log("He pulsado la tecla derecha");
+        e.preventDefault();
+        changeFocus();
+
         break;
       case "ArrowUp":
         console.log("He pulsado la tecla arriba");
+
         break;
       case "ArrowDown":
         console.log("He pulsado la tecla abajo");
+
         break;
       case "Tab":
         console.log("He pulsado la tecla Tab");
+        e.preventDefault();
+        changeFocus();
         break;
       case "Escape":
         console.log("He pulsado la tecla Escape");
+        break;
+      // Evitamos que pueda borrar el input
+      case "Backspace":
+      case "Delete":
+        e.preventDefault();
         break;
       default:
         console.log("He pulsado otra tecla: ", e.key);
