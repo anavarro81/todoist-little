@@ -1,7 +1,7 @@
 import styles from "./DateSelector.module.css";
 import cn from "classnames";
 import { Icons } from "../Icons";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   getDayOfWeek,
   getMonthName,
@@ -17,6 +17,8 @@ interface DateSelectorProps {
 }
 
 const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
+  const inputTimeRef = useRef<HTMLInputElement | null>(null);
+
   const [dates, setDates] = useState<DateState>(() => {
     const today = new Date();
 
@@ -111,6 +113,42 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
 
       return nextViewDate;
     });
+  };
+
+  const handleInput = () => {
+    setShowListOfHour((prev) => !prev);
+
+    if (inputTimeRef.current) {
+      inputTimeRef.current.setSelectionRange(0, 2);
+    }
+  };
+
+  const handleKeyDown = (e: any) => {
+    switch (e.key) {
+      case "ArrowLeft":
+        console.log("He pulsado la tecla izquierda");
+        break;
+      case "ArrowRight":
+        console.log("He pulsado la tecla derecha");
+        break;
+      case "ArrowUp":
+        console.log("He pulsado la tecla arriba");
+        break;
+      case "ArrowDown":
+        console.log("He pulsado la tecla abajo");
+        break;
+      case "Tab":
+        console.log("He pulsado la tecla Tab");
+        break;
+      case "Escape":
+        console.log("He pulsado la tecla Escape");
+        break;
+      default:
+        console.log("He pulsado otra tecla: ", e.key);
+        break;
+    }
+
+    // DateSelector.tsx:127 Tecla pulsada  Escape
   };
 
   return (
@@ -237,7 +275,10 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
                     type="text"
                     value={hour}
                     onChange={validateHour}
-                    onClick={() => setShowListOfHour((prev) => !prev)}
+                    ref={inputTimeRef}
+                    id="time-input"
+                    onClick={handleInput}
+                    onKeyDown={handleKeyDown}
                     aria-invalid={!isHourValid}
                     aria-describedby={
                       !isHourValid ? "hora-invalid-tooltip" : undefined
@@ -272,7 +313,6 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
           </div>
         </div>
       </div>
-      <Icons name="Check" />
     </>
   );
 };
