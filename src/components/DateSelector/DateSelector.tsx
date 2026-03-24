@@ -209,7 +209,7 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
         e.preventDefault();
         break;
       default:
-        if (e.key <= "0" || e.key >= "9") {
+        if (e.key < "0" || e.key > "9") {
           e.preventDefault();
         } else {
           if (inputTimeRef.current) {
