@@ -1,7 +1,7 @@
 import styles from "./DateSelector.module.css";
 import cn from "classnames";
 import { Icons } from "../Icons";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useLayoutEffect } from "react";
 import {
   getDayOfWeek,
   getMonthName,
@@ -18,6 +18,10 @@ interface DateSelectorProps {
 
 const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
   const inputTimeRef = useRef<HTMLInputElement | null>(null);
+
+  // Se define un contenedor re-render que se mantiene tras el re-render, sin disparar otro re-render
+  // Guarda la última posicion del caret para reposicionarlo cada vez que se introduce un nuevo digito.
+  const caretPosRef = useRef<number | null>(null);
 
   const [dates, setDates] = useState<DateState>(() => {
     const today = new Date();
@@ -42,27 +46,15 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
 
   const [showHourSelector, setShowHourSelector] = useState(false);
 
-  const [hour, setHour] = useState("");
+  const [hour, setHour] = useState({
+    hour_hh: "00",
+    separator: ":",
+    hour_mm: "30",
+  });
+
   const [hoursSelector, setHoursSelector] = useState<string[]>([]);
 
-  const [isHourValid, setIsHourValid] = useState(true);
-
   const [showListOfHour, setShowListOfHour] = useState(false);
-
-  const validateHour = (e: any) => {
-    const value = e.target.value;
-    setHour(value);
-
-    // Consider empty value as valid (no tooltip)
-    if (value === "") {
-      setIsHourValid(true);
-      return;
-    }
-
-    // Validate format HH:MM (24-hour)
-    const isValid = /^([01]?\d|2[0-3]):([0-5]\d)$/.test(value);
-    setIsHourValid(isValid);
-  };
 
   useEffect(() => {
     const today = new Date();
@@ -74,7 +66,7 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
     const hours = generateHours();
 
     setHoursSelector(hours);
-    setHour(hours[0]);
+    // setHour(hours[0]);
 
     setDates({
       today: today,
@@ -84,6 +76,38 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
       monthGrid: generateMonth(today),
     });
   }, []);
+
+  useLayoutEffect(() => {
+    console.log("He cambiado la hora ");
+
+    if (inputTimeRef.current) {
+      console.log("posicion ", inputTimeRef.current.selectionStart);
+
+      inputTimeRef.current.focus();
+
+      inputTimeRef.current.value.length;
+
+      console.log("longitud ", inputTimeRef.current.value.length);
+      console.log("valor ", inputTimeRef.current.value);
+
+      switch (caretPosRef.current) {
+        case 0:
+          inputTimeRef.current.setSelectionRange(0, 2);
+          break;
+        case 1:
+          inputTimeRef.current.setSelectionRange(1, 2);
+          break;
+        case 3:
+          inputTimeRef.current.setSelectionRange(3, 5);
+          break;
+        case 4:
+          inputTimeRef.current.setSelectionRange(4, 5);
+          break;
+        default:
+          break;
+      }
+    }
+  }, [hour]);
 
   const goToCurrentDay = () => {
     setDates((prev) => ({ ...prev, monthGrid: generateMonth(dates.today) }));
@@ -119,10 +143,24 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
     setShowListOfHour((prev) => !prev);
 
     if (inputTimeRef.current) {
-      inputTimeRef.current.setSelectionRange(0, 2);      
+      inputTimeRef.current.setSelectionRange(0, 2);
     }
-  };
 
+    // if (inputTimeRef.current) {
+    //   hours = inputTimeRef.current.value.slice(0, 2);
+    //   minutes = inputTimeRef.current.value.slice(3, 5);
+    // }
+
+    //   hoursSelector.filter();
+
+    //   if (minutes >= 30) {
+    //     minutes = 0;
+    //     hour++;
+    //   } else {
+    //     minutes = 30;
+    //   }
+    // };
+  };
   // Change de focus between hours and minutos
   const changeFocus = () => {
     if (inputTimeRef.current) {
@@ -140,23 +178,21 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
   const handleKeyDown = (e: any) => {
     switch (e.key) {
       case "ArrowLeft":
-        console.log("He pulsado la tecla izquierda");
         e.preventDefault();
         changeFocus();
 
         break;
       case "ArrowRight":
-        console.log("He pulsado la tecla derecha");
         e.preventDefault();
         changeFocus();
 
         break;
       case "ArrowUp":
-        console.log("He pulsado la tecla arriba");
+        //changeTime();
 
         break;
       case "ArrowDown":
-        console.log("He pulsado la tecla abajo");
+        //changeTime();
 
         break;
       case "Tab":
@@ -173,11 +209,47 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
         e.preventDefault();
         break;
       default:
-        console.log("He pulsado otra tecla: ", e.key);
-        break;
-    }
+        if (e.key <= "0" || e.key >= "9") {
+          e.preventDefault();
+        } else {
+          if (inputTimeRef.current) {
+            switch (inputTimeRef.current.selectionStart) {
+              case 0:
+                e.preventDefault();
+                caretPosRef.current = 1;
+                setHour((prev) => ({ ...prev, hour_hh: ` ${e.key}` }));
 
-    // DateSelector.tsx:127 Tecla pulsada  Escape
+                break;
+              case 1:
+                e.preventDefault();
+                caretPosRef.current = 3;
+                setHour((prev) => ({
+                  ...prev,
+                  hour_hh: `${prev.hour_hh[1]}${e.key}`,
+                }));
+                break;
+              case 3:
+                e.preventDefault();
+                caretPosRef.current = 4;
+                setHour((prev) => ({
+                  ...prev,
+                  hour_mm: ` ${e.key}`,
+                }));
+                break;
+              case 4:
+                e.preventDefault();
+                caretPosRef.current = 0;
+                setHour((prev) => ({
+                  ...prev,
+                  hour_mm: `${prev.hour_mm[1]}${e.key}`,
+                }));
+                break;
+              default:
+                break;
+            }
+          }
+        }
+    }
   };
 
   return (
@@ -287,31 +359,15 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
             {showHourSelector && (
               <>
                 <div className={styles.timeButtonContainer} id="input-hora">
-                  {/* Tooltip shown above input when hour is invalid */}
-                  {!isHourValid && hour !== "" && (
-                    <div
-                      id="hora-invalid-tooltip"
-                      className={styles.tooltip}
-                      role="alert"
-                      aria-live="polite"
-                    >
-                      hora no valida
-                    </div>
-                  )}
-
                   <Icons name="Clock" />
                   <input
                     type="text"
-                    value={hour}
-                    onChange={validateHour}
+                    value={`${hour.hour_hh}${hour.separator}${hour.hour_mm}`}
+                    // onChange={}
                     ref={inputTimeRef}
                     id="time-input"
                     onClick={handleInput}
                     onKeyDown={handleKeyDown}
-                    aria-invalid={!isHourValid}
-                    aria-describedby={
-                      !isHourValid ? "hora-invalid-tooltip" : undefined
-                    }
                   />
                   <button>
                     <Icons name="Cancel" />

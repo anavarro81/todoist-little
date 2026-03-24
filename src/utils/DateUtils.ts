@@ -129,7 +129,7 @@ export const generateHours = () => {
   const finalHour = new Date();
   finalHour.setHours(23, 30, 0, 0);
 
-  console.log("Hora final ==> ", finalHour.toLocaleTimeString());
+  
 
   const ADD_MINUTES = 30;
   const hours = [];
