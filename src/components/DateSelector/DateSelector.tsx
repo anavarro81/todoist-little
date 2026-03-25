@@ -47,9 +47,9 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
   const [showHourSelector, setShowHourSelector] = useState(false);
 
   const [hour, setHour] = useState({
-    hour_hh: "00",
+    hour_hh: "",
     separator: ":",
-    hour_mm: "30",
+    hour_mm: "",
   });
 
   const [hoursSelector, setHoursSelector] = useState<string[]>([]);
@@ -66,6 +66,18 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
     const hours = generateHours();
 
     setHoursSelector(hours);
+
+    console.log("hours[0] ", hours[0]);
+    setHour({
+      hour_hh: hours[0].slice(0, 2),
+      separator: ":",
+      hour_mm: hours[0].slice(3, 5),
+    });
+
+    //     hour_hh: "",
+    // separator: ":",
+    // hour_mm: "",
+
     // setHour(hours[0]);
 
     setDates({
@@ -146,10 +158,13 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
       inputTimeRef.current.setSelectionRange(0, 2);
     }
 
-    // if (inputTimeRef.current) {
-    //   hours = inputTimeRef.current.value.slice(0, 2);
-    //   minutes = inputTimeRef.current.value.slice(3, 5);
-    // }
+    let hours = "";
+    let minutes = "";
+
+    if (inputTimeRef.current) {
+      hours = inputTimeRef.current.value.slice(0, 2);
+      minutes = inputTimeRef.current.value.slice(3, 5);
+    }
 
     //   hoursSelector.filter();
 
@@ -213,6 +228,8 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
           e.preventDefault();
         } else {
           if (inputTimeRef.current) {
+            setShowListOfHour(false);
+
             switch (inputTimeRef.current.selectionStart) {
               case 0:
                 e.preventDefault();
@@ -223,6 +240,7 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
               case 1:
                 e.preventDefault();
                 caretPosRef.current = 3;
+
                 setHour((prev) => ({
                   ...prev,
                   hour_hh: `${prev.hour_hh[1]}${e.key}`,
@@ -375,7 +393,7 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
                 </div>
 
                 {showListOfHour && (
-                  <div className={styles.hourSelector}>
+                  <div className={styles.hourSelector} id="hour-list">
                     <ul>
                       {hoursSelector.map((hour: string, index: number) => {
                         if (index === 0) {

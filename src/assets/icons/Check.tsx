@@ -11,7 +11,7 @@ const Check = (props: React.SVGProps<SVGSVGElement>) => {
       id="check"
       data-name="Flat Color"
       xmlns="http://www.w3.org/2000/svg"
-      class="icon flat-color"
+      
       {...props}
     >
       <path
