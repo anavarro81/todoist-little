@@ -92,15 +92,9 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
   useLayoutEffect(() => {
     console.log("He cambiado la hora ");
 
-    if (inputTimeRef.current) {
-      console.log("posicion ", inputTimeRef.current.selectionStart);
+    if (inputTimeRef.current) {      
 
       inputTimeRef.current.focus();
-
-      inputTimeRef.current.value.length;
-
-      console.log("longitud ", inputTimeRef.current.value.length);
-      console.log("valor ", inputTimeRef.current.value);
 
       switch (caretPosRef.current) {
         case 0:
@@ -182,6 +176,16 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
       const start = inputTimeRef.current.selectionStart;
       const end = inputTimeRef.current.selectionEnd;
 
+      if (hour.hour_hh.startsWith(" ", 0)) {
+        console.log("empieza con espacio las horas");
+        setHour((prev) => ({ ...prev, hour_hh: `0${prev.hour_hh[1]}` }));
+        caretPosRef.current = 3;
+      } else if (hour.hour_mm.startsWith(" ", 0)) {
+        console.log("empieza con espacio los minutos");
+        setHour((prev) => ({ ...prev, hour_mm: `0${prev.hour_mm[1]}` }));
+        caretPosRef.current = 0;
+      }
+
       if (start == 3 && end == 5) {
         inputTimeRef.current.setSelectionRange(0, 2);
       } else {
@@ -213,6 +217,7 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
       case "Tab":
         console.log("He pulsado la tecla Tab");
         e.preventDefault();
+
         changeFocus();
         break;
       case "Escape":
