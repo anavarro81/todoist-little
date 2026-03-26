@@ -56,6 +56,9 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
 
   const [showListOfHour, setShowListOfHour] = useState(false);
 
+  // Array que contiene todas las horas desde 00:00 a 00:30
+  const [allHours, setAllHours] = useState<string[]>([]);
+
   useEffect(() => {
     const today = new Date();
     const tomorrow = new Date();
@@ -63,22 +66,37 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
     tomorrow.setDate(tomorrow.getDate() + 1);
     nextWeek.setDate(nextWeek.getDate() + 7);
 
+    // TODO
+    let currentMinutes = today.getMinutes();
+    let currentHour = today.getHours();
+
+    // Calcular hora inicial
+    if (currentMinutes > 0 && currentMinutes < 30) {
+      currentMinutes = 30;
+    } else if (currentMinutes > 30) {
+      currentMinutes = 0;
+      currentHour++;
+    }
+
     const hours = generateHours();
 
-    setHoursSelector(hours);
+    setAllHours(hours);
 
-    console.log("hours[0] ", hours[0]);
+    const filteredHours = hours.filter(
+      (hour: string) =>
+        hour >=
+        `${currentHour.toString().padStart(2, "0")}:${currentMinutes.toString().padStart(2, "0")}`,
+    );
+
+    // filtrar para seleccionar a partir de la hora del día la primera vez.
+
+    setHoursSelector(filteredHours);
+
     setHour({
-      hour_hh: hours[0].slice(0, 2),
+      hour_hh: filteredHours[0].slice(0, 2),
       separator: ":",
-      hour_mm: hours[0].slice(3, 5),
+      hour_mm: filteredHours[0].slice(3, 5),
     });
-
-    //     hour_hh: "",
-    // separator: ":",
-    // hour_mm: "",
-
-    // setHour(hours[0]);
 
     setDates({
       today: today,
@@ -92,8 +110,7 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
   useLayoutEffect(() => {
     console.log("He cambiado la hora ");
 
-    if (inputTimeRef.current) {      
-
+    if (inputTimeRef.current) {
       inputTimeRef.current.focus();
 
       switch (caretPosRef.current) {
@@ -152,23 +169,30 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
       inputTimeRef.current.setSelectionRange(0, 2);
     }
 
-    let hours = "";
-    let minutes = "";
+    let hours = 0;
+    let minutes = 0;
+    let rawValue = "";
 
     if (inputTimeRef.current) {
-      hours = inputTimeRef.current.value.slice(0, 2);
-      minutes = inputTimeRef.current.value.slice(3, 5);
+      rawValue = inputTimeRef.current.value;
+      hours = parseInt(rawValue.slice(0, 2));
+      minutes = parseInt(rawValue.slice(3, 5));
     }
 
-    //   hoursSelector.filter();
+    if (minutes > 0 && minutes < 30) {
+      minutes = 30;
+    } else if (minutes > 30) {
+      minutes = 0;
+      hours++;
+    }
 
-    //   if (minutes >= 30) {
-    //     minutes = 0;
-    //     hour++;
-    //   } else {
-    //     minutes = 30;
-    //   }
-    // };
+    const result = allHours.filter(
+      (hour: string) =>
+        hour >=
+        `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}`,
+    );
+
+    setHoursSelector(result);
   };
   // Change de focus between hours and minutos
   const changeFocus = () => {

@@ -125,27 +125,18 @@ export const generateMonth = (date: Date): daysOfMonth[] => {
 };
 
 export const generateHours = () => {
+  
+  // Genera un array con todas las horas (en bloques de 30) desde las 00:00 a las 23:30h
+  
   const today = new Date();
   const finalHour = new Date();
   finalHour.setHours(23, 30, 0, 0);
-
+  today.setHours(0, 0, 0, 0);
   
 
   const ADD_MINUTES = 30;
   const hours = [];
-
-  let minutes = today.getMinutes();
-  let hour = today.getHours();
-
-  // Calcular hora inicial
-  if (minutes >= 30) {
-    minutes = 0;
-    hour++;
-  } else {
-    minutes = 30;
-  }
-  // Setear hora inicial
-  today.setHours(hour, minutes, 0, 0);
+  
   hours.push(
     today.getHours().toString().padStart(2, "0") +
       ":" +

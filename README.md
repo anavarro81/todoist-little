@@ -1,16 +1,16 @@
 # Todois Litte Front
 
-Frontend para aplicación de gestión de tareas inspirada en Todoist | React + TypeScript + Vite + CSS
 
-## Stack
+*hoursSelector* -> Array que contiene las horas del listado
 
-- Vite
-- Typescript
-- CSS
+```javascript 
+const [hoursSelector, setHoursSelector] = useState<string[]>([]);
+```
 
-## Scripts
-- `dev` -> Ejecuta el proyecto
-- 
+
+![alt text](image.png)
+
+👉 Se genera en **generateHours**
 
 
 
