@@ -218,6 +218,7 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
     }
   };
 
+  // Cuando se pulsan las teclas arriba y abajo incrementa o decrementa la hora en bloques de 30 minutos
   const changeTime = (direction: string) => {
     const d = new Date();
     const add30MinutesInMs = 30 * 60 * 1000;
@@ -236,6 +237,19 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
       separator: ":",
       hour_mm: d.getMinutes().toString().padStart(2, "0"),
     });
+  };
+
+  // Al seleccionar una hora del listado se muestra en el input y se cierra el listado.
+  const handleSetHour = (selectedHour: string) => {
+    console.log("selectedHour ", selectedHour);
+
+    setHour({
+      hour_hh: selectedHour.slice(0, 2),
+      separator: ":",
+      hour_mm: selectedHour.slice(3, 5),
+    });
+
+    setShowListOfHour(false);
   };
 
   const handleKeyDown = (e: any) => {
@@ -421,18 +435,18 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
             {showHourSelector && (
               <>
                 <div className={styles.timeButtonContainer} id="input-hora">
-                  <Icons name="Clock" />
+                  <Icons name="Clock" fill="#4895ef" />
                   <input
+                    className={styles.inputHora}
                     type="text"
                     value={`${hour.hour_hh}${hour.separator}${hour.hour_mm}`}
-                    // onChange={}
                     ref={inputTimeRef}
                     id="time-input"
                     onClick={handleInput}
                     onKeyDown={handleKeyDown}
                   />
                   <button>
-                    <Icons name="Cancel" />
+                    <Icons name="Cancel" fill="#4895ef" />
                   </button>
                 </div>
 
@@ -449,7 +463,12 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
                           );
                         }
 
-                        return <li key={hour}> {hour} </li>;
+                        return (
+                          <li key={hour} onClick={() => handleSetHour(hour)}>
+                            {" "}
+                            {hour}{" "}
+                          </li>
+                        );
                       })}
                     </ul>
                   </div>

@@ -13,8 +13,8 @@ import Cancel from "../assets/icons/Cancel.tsx";
 import ArrowLeft from "../assets/icons/ArrowLeft.tsx";
 import ArrowRight from "../assets/icons/ArrowRight.tsx";
 import Circle from "../assets/icons/Circle.tsx";
-import Clock from "../assets/icons/clock.tsx";
 import Check from "../assets/icons/Check.tsx"
+import Clock from "../assets/icons/Clock.tsx";
 
 const icons = {
   Chevron: Chevron,

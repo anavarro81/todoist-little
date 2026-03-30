@@ -174,3 +174,7 @@ button {
   padding-left: 1rem;
   font-size: 15px;
 }
+
+.inputHora {
+  color: var(--main-color);
+}
