@@ -1,12 +1,13 @@
 .container {
-  max-width: 32rem;
+  min-width: 32rem;
+
   background-color: #f3f3f3;
   padding: 2.5rem 1rem;
   border-radius: 2rem;
   gap: 1.7rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   position: absolute;
   /* Lo posiciona justo debajo del contenedor padre */
   top: 100%;
@@ -26,6 +27,7 @@
   justify-content: center;
   flex-direction: column;
   gap: 1.1rem;
+  width: 100%;
 }
 
 .datePickerQuickSelect > button {
@@ -110,14 +112,21 @@
   justify-content: space-between;
   border: 0;
   position: relative;
+  width: 100%;
 }
 
 .timeButtonContainer:focus {
   border: 0;
 }
 
+.timeButtonContainer input {
+  flex: 1;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
 .timeButtonContainer input,
-button {
+.timeButtonContainer button {
   border: 0;
   outline: none;
 }
@@ -137,21 +146,7 @@ button {
   align-items: center;
 }
 
-/* Tooltip appearing above the input when invalid */
-.tooltip {
-  position: absolute;
-  bottom: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(0, 0, 0, 0.9);
-  color: #fff;
-  padding: 4px 8px;
-  border-radius: 6px;
-  font-size: 12px;
-  white-space: nowrap;
-  margin-bottom: 8px;
-  z-index: 10;
-}
+
 
 .blueButton {
   background-color: var(--main-color);
@@ -177,4 +172,9 @@ button {
 
 .inputHora {
   color: var(--main-color);
+}
+
+.datePickerQuickSelect > button,
+.datePickerQuickSelect > div {
+  width: 100%;
 }

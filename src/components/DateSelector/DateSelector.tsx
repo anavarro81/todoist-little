@@ -418,8 +418,8 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
           <div className={styles.bottonButtonContainer}>
             {!showHourSelector && (
               <>
-                <button
-                  type="button"
+                <div
+                  role="button"
                   className={styles.timeButtonContainer}
                   onClick={() => setShowHourSelector(!showHourSelector)}
                 >
@@ -427,8 +427,10 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
                     <Icons name="Clock" />
                     <span>Hora</span>
                   </div>
-                  <Icons name="Chevron" fill="black" />
-                </button>
+                  <button>
+                    <Icons name="Chevron" fill="black" />
+                  </button>
+                </div>
               </>
             )}
 
