@@ -13,4 +13,18 @@ const [hoursSelector, setHoursSelector] = useState<string[]>([]);
 👉 Se genera en **generateHours**
 
 
+## Hora del input
+
+```
+  const [hour, setHour] = useState({
+    hour_hh: "",
+    separator: ":",
+    hour_mm: "",
+  });
+``` 
+
+## Input de horas
+
+*handleKeyDown*
+
 

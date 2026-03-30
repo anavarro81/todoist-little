@@ -1,9 +1,9 @@
 // Los valores que se pasan en los props sobrescriben los originales del svg
-// Se incluye al final. 
+// Se incluye al final.
 
 const Cancel = (props: React.SVGProps<SVGSVGElement>) => {
   return (
-      <svg
+    <svg
       width="24"
       height="24"
       viewBox="0 0 24 24"
@@ -14,9 +14,9 @@ const Cancel = (props: React.SVGProps<SVGSVGElement>) => {
       <path
         d="M19.0005 4.99988L5.00049 18.9999M5.00049 4.99988L19.0005 18.9999"
         stroke="black"
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );

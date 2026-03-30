@@ -218,6 +218,26 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
     }
   };
 
+  const changeTime = (direction: string) => {
+    const d = new Date();
+    const add30MinutesInMs = 30 * 60 * 1000;
+    const substract30MinutsInMs = -30 * 60 * 1000;
+
+    d.setHours(parseInt(hour.hour_hh), parseInt(hour.hour_mm));
+
+    if (direction == "ArrowDown") {
+      d.setTime(d.getTime() + add30MinutesInMs);
+    } else {
+      d.setTime(d.getTime() + substract30MinutsInMs);
+    }
+
+    setHour({
+      hour_hh: d.getHours().toString().padStart(2, "0"),
+      separator: ":",
+      hour_mm: d.getMinutes().toString().padStart(2, "0"),
+    });
+  };
+
   const handleKeyDown = (e: any) => {
     switch (e.key) {
       case "ArrowLeft":
@@ -231,11 +251,11 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
 
         break;
       case "ArrowUp":
-        //changeTime();
+        changeTime(e.key);
 
         break;
       case "ArrowDown":
-        //changeTime();
+        changeTime(e.key);
 
         break;
       case "Tab":
@@ -362,26 +382,21 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
           {/* Calendar */}
           <div className={styles.datePickerCalendarGrid}>
             {daysOfWeekMon.map((day) => {
-              return (
-                <>
-                  <div> {day.slice(0, 1)} </div>
-                </>
-              );
+              return <div key={day}> {day.slice(0, 1)} </div>;
             })}
             {dates.monthGrid.map((day) => {
               return (
-                <>
-                  <button
-                    type="button"
-                    disabled={day.isDisable}
-                    className={cn(styles.datePickerCell, {
-                      [styles.currentDay]: day.isCurrentDay,
-                      [styles.datePickerDisabled]: day.isDisable,
-                    })}
-                  >
-                    {day.isVisible && day.day}
-                  </button>
-                </>
+                <button
+                  key={day.day}
+                  type="button"
+                  disabled={day.isDisable}
+                  className={cn(styles.datePickerCell, {
+                    [styles.currentDay]: day.isCurrentDay,
+                    [styles.datePickerDisabled]: day.isDisable,
+                  })}
+                >
+                  {day.isVisible && day.day}
+                </button>
               );
             })}
           </div>
