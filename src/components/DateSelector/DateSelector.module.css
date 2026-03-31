@@ -1,3 +1,8 @@
+/* ---------------------------------------------------
+   INDEX
+   01. Repeat Selector
+-----------------------------------------------------*/
+
 .container {
   min-width: 32rem;
 
@@ -146,8 +151,6 @@
   align-items: center;
 }
 
-
-
 .blueButton {
   background-color: var(--main-color);
   color: white;
@@ -177,4 +180,26 @@
 .datePickerQuickSelect > button,
 .datePickerQuickSelect > div {
   width: 100%;
+}
+
+/* -----------------------------------------------
+   01. Repeat Selector
+----------------------------------------------- */
+
+.repeatSelectorContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+  text-align: left;
+}
+
+/* Botones opciones de repeticion: diario, mensual... */
+.repeatSelectorContainer button {
+  border: 0;
+  text-align: left;
+}
+
+.repeatSelectorContainer button span {
+  color: #707070;
 }

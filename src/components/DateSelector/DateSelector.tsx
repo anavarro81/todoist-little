@@ -11,6 +11,7 @@ import {
   generateHours,
 } from "../../utils/DateUtils";
 import type { DateState } from "../../utils/DateUtils";
+import RepeatSelector from "./RepeatSelector";
 
 interface DateSelectorProps {
   handleTaskForm: (name: string, value: Date | null) => void;
@@ -479,6 +480,9 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
             )}
             <button className={styles.blueButton}> Repetir </button>
           </div>
+        </div>
+        <div>
+            <RepeatSelector/>
         </div>
       </div>
     </>
