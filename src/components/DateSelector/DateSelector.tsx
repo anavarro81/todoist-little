@@ -57,6 +57,8 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
 
   const [showListOfHour, setShowListOfHour] = useState(false);
 
+  const [showRepeatSelector, setShowRepeatSelector] = useState(false);
+
   // Array que contiene todas las horas desde 00:00 a 00:30
   const [allHours, setAllHours] = useState<string[]>([]);
 
@@ -478,11 +480,18 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
                 )}
               </>
             )}
-            <button className={styles.blueButton}> Repetir </button>
+
+            <div className={styles.repeatWrapper}>
+              <button
+                type="button"
+                className={styles.repeatButton}
+                onClick={() => setShowRepeatSelector(!showRepeatSelector)}
+              >
+                Repetir
+              </button>
+              {showRepeatSelector && <RepeatSelector />}
+            </div>
           </div>
-        </div>
-        <div>
-            <RepeatSelector/>
         </div>
       </div>
     </>
