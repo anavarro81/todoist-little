@@ -10,7 +10,7 @@ function App() {
   return (
     <>
       <div className="app-container">
-        {/* <SideBar name={"Antonio"} /> */}
+        <SideBar name={"Antonio"} />
         <div className="main-container">
           <NewTaskWindow />;
         </div>

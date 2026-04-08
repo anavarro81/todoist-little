@@ -31,9 +31,6 @@ const NewTaskWindow = () => {
   const [formTask, setFormTask] = useState<ITask>(initialTaskForm);
 
   const handleTaskForm = (name: string, value: any) => {
-    
-    
-
     setFormTask((prev) => ({ ...prev, [name]: value }));
   };
 
@@ -70,17 +67,17 @@ const NewTaskWindow = () => {
                 Prioridad
                 {<Icons name="Chevron" />}
               </button>
-              <button>
+              {/* <button>
                 {<Icons name="Label" />}
                 Etiqueta
                 {<Icons name="Chevron" />}
-              </button>
+              </button> */}
             </div>
             <div className={styles.btnContSecondBlock}>
-              <button>
+              {/* <button>
                 {<Icons name="Project" />}
                 <span>Asignar proyecto </span>
-              </button>
+              </button> */}
               <button>
                 {<Icons name="Cancel" />}
                 <span>Cancelar </span>

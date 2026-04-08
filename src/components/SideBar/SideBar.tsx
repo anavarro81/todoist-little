@@ -18,25 +18,15 @@ interface SideBarItem {
   counterBadget?: number;
 }
 
-const toggleSearch = () => {
-  
-};
+const toggleSearch = () => {};
 
-const showInboxTasks = () => {
-  
-};
+const showInboxTasks = () => {};
 
-const showTodayTask: React.MouseEventHandler<HTMLButtonElement> = () => {
-  
-};
+const showTodayTask: React.MouseEventHandler<HTMLButtonElement> = () => {};
 
-const showUpComingTask: React.MouseEventHandler<HTMLButtonElement> = () => {
-  
-};
+const showUpComingTask: React.MouseEventHandler<HTMLButtonElement> = () => {};
 
-const showTagsScreen: React.MouseEventHandler<HTMLButtonElement> = () => {
-  
-};
+const showTagsScreen: React.MouseEventHandler<HTMLButtonElement> = () => {};
 
 const SIDEBARBUTTONS: SideBarItem[] = [
   {
@@ -65,12 +55,12 @@ const SIDEBARBUTTONS: SideBarItem[] = [
     onClick: showUpComingTask,
     counterBadget: Math.floor(Math.random() * 10) + 1,
   },
-  {
-    id: "labels",
-    icon: <Icons name="Label" />,
-    text: "Etiquetas",
-    onClick: showTagsScreen,
-  },
+  // {
+  //   id: "labels",
+  //   icon: <Icons name="Label" />,
+  //   text: "Etiquetas",
+  //   onClick: showTagsScreen,
+  // },
 ];
 
 const SideBar = ({ name }: SideBarProps) => {
@@ -78,7 +68,6 @@ const SideBar = ({ name }: SideBarProps) => {
 
   const showNewTaskWindow = () => {
     setisVisible((currentState) => !currentState);
-    
   };
 
   return (
@@ -97,7 +86,7 @@ const SideBar = ({ name }: SideBarProps) => {
         />
       ))}
 
-      <ProjectAccordion />
+      {/* <ProjectAccordion /> */}
     </div>
   );
 };
