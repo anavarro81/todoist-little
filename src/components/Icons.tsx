@@ -15,6 +15,8 @@ import ArrowRight from "../assets/icons/ArrowRight.tsx";
 import Circle from "../assets/icons/Circle.tsx";
 import Check from "../assets/icons/Check.tsx"
 import Clock from "../assets/icons/Clock.tsx";
+import PriorityFlag from "../assets/icons/PriorityFlag.tsx"
+import Tick from "../assets/icons/Tick.tsx"
 
 const icons = {
   Chevron: Chevron,
@@ -33,7 +35,9 @@ const icons = {
   ArrowRight: ArrowRight,
   Circle: Circle,
   Clock: Clock,
-  Check: Check
+  Check: Check,
+  PriorityFlag: PriorityFlag,
+  Tick: Tick
 };
 
 type IconName = keyof typeof icons;

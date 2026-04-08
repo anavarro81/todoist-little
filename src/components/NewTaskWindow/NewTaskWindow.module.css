@@ -58,6 +58,20 @@ input::placeholder {
   gap: 1rem;
 }
 
+.primaryButton {
+  background-color: var(--secondary-color);
+  color: white;
+  padding: 1.9rem 2.7rem;
+  border-radius: 2rem;
+  border: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 20rem;
+  width: 100%;
+}
+
 /* Segundo bloque de botones */
 
 .btnContSecondBlock {
@@ -91,4 +105,8 @@ input::placeholder {
   display: flex;
   align-items: center;
   color: white;
+}
+
+.relative {
+  position: relative;
 }

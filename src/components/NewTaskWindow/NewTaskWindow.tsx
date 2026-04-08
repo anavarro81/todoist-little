@@ -2,6 +2,7 @@ import styles from "./NewTaskWindow.module.css";
 import { Icons } from "../Icons";
 import { useState } from "react";
 import DateSelector from "../DateSelector/DateSelector";
+import PrioritySelector from "../PrioritySelector/PrioritySelector";
 
 interface NewTaskWindowProps {
   isVisible: boolean;
@@ -26,7 +27,7 @@ const initialTaskForm = {
 const NewTaskWindow = () => {
   const [isVisible, setIsVisible] = useState(true);
 
-  const [isVisibleDateSelector, setIsVisibeDateSelector] = useState(true);
+  const [isVisibleDateSelector, setIsVisibeDateSelector] = useState(false);
 
   const [formTask, setFormTask] = useState<ITask>(initialTaskForm);
 
@@ -62,11 +63,16 @@ const NewTaskWindow = () => {
               {isVisibleDateSelector && (
                 <DateSelector handleTaskForm={handleTaskForm} />
               )}
-              <button>
-                {<Icons name="Priority" />}
-                Prioridad
-                {<Icons name="Chevron" />}
-              </button>
+              <div>
+                <button className={styles.primaryButton}>
+                  {<Icons name="Priority" />}
+                  Prioridad
+                  {<Icons name="Chevron" />}
+                </button>
+
+                <PrioritySelector priority="p4"/>
+              </div>
+
               {/* <button>
                 {<Icons name="Label" />}
                 Etiqueta
