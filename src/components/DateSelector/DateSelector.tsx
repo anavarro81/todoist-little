@@ -11,7 +11,8 @@ import {
   generateHours,
 } from "../../utils/DateUtils";
 import type { DateState } from "../../utils/DateUtils";
-import RepeatSelector from "./RepeatSelector";
+//TODO Incluir las opciones de repetición en la segunda fase. 
+// import RepeatSelector from "./RepeatSelector";
 
 interface DateSelectorProps {
   handleTaskForm: (name: string, value: Date | null) => void;
@@ -57,7 +58,8 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
 
   const [showListOfHour, setShowListOfHour] = useState(false);
 
-  const [showRepeatSelector, setShowRepeatSelector] = useState(false);
+  //TODO Incluir las opciones de repetición en la segunda fase. 
+  // const [showRepeatSelector, setShowRepeatSelector] = useState(false);
 
   // Array que contiene todas las horas desde 00:00 a 00:30
   const [allHours, setAllHours] = useState<string[]>([]);
@@ -481,6 +483,7 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
               </>
             )}
 
+            {/* //TODO Incluir las opciones de repetición en la segunda fase. 
             <div className={styles.repeatWrapper}>
               <button
                 type="button"
@@ -490,7 +493,7 @@ const DateSelector = ({ handleTaskForm }: DateSelectorProps) => {
                 Repetir
               </button>
               {showRepeatSelector && <RepeatSelector />}
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
