@@ -39,6 +39,46 @@ const NewTaskWindow = () => {
     setIsVisibeDateSelector(!isVisibleDateSelector);
   };
 
+  // Prioridad
+
+  interface PriorityState {
+    haspriority: boolean;
+    value: "p1" | "p2" | "p3" | "p4";
+    label: string;
+    fill: string;
+    stroke: string;
+  }
+
+  const [priorityState, setPriorityState] = useState<PriorityState>({
+    haspriority: false,
+    value: "p4",
+    label: "",
+    fill: "",
+    stroke: "",
+  });
+
+  const [isVisiblePrioritySelector, setVisiblePrioritySelector] =
+    useState(false);
+
+  const togglePrioritySelect = () => {
+    setVisiblePrioritySelector(!isVisiblePrioritySelector);
+  };
+
+  const changePriority = (priority: any) => {
+    const haspriority = priority.value !== "p4";
+
+    setPriorityState({
+      haspriority,
+      value: priority.value,
+      label: priority.label,
+      fill: priority.fill,
+      stroke: priority.stroke,
+    });
+
+    // Cierra la lista despues de haber seleccionado una prioridad.
+    togglePrioritySelect();
+  };
+
   return (
     isVisible && (
       <>
@@ -64,13 +104,32 @@ const NewTaskWindow = () => {
                 <DateSelector handleTaskForm={handleTaskForm} />
               )}
               <div>
-                <button className={styles.primaryButton}>
-                  {<Icons name="Priority" />}
-                  Prioridad
+                <button
+                  type="button"
+                  className={styles.primaryButton}
+                  onClick={togglePrioritySelect}
+                >
+                  {priorityState.haspriority ? (
+                    <>
+                      <Icons name="PriorityFlag" fill={priorityState.fill} />
+                      <span> {priorityState.value.toUpperCase()} </span>
+                    </>
+                  ) : (
+                    <>
+                      <Icons name="Priority" />
+                      <span> Prioridad </span>
+                    </>
+                  )}
+
                   {<Icons name="Chevron" />}
                 </button>
 
-                <PrioritySelector priority="p4"/>
+                {isVisiblePrioritySelector && (
+                  <PrioritySelector
+                    priority={priorityState.value}
+                    changePriority={changePriority}
+                  />
+                )}
               </div>
 
               {/* <button>
@@ -84,11 +143,11 @@ const NewTaskWindow = () => {
                 {<Icons name="Project" />}
                 <span>Asignar proyecto </span>
               </button> */}
-              <button>
+              <button type="button">
                 {<Icons name="Cancel" />}
                 <span>Cancelar </span>
               </button>
-              <button>
+              <button type="submit">
                 {<Icons name="Add" />}
                 Añadir tarea
               </button>

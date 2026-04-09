@@ -3,6 +3,8 @@ import { Icons } from "../Icons";
 
 interface PrioritySelectoProps {
   priority: "p1" | "p2" | "p3" | "p4";
+  changePriority: (priority: any) => void;
+  
 }
 
 const PRIORITY_OPTIONS = [
@@ -17,7 +19,13 @@ const PrioritySelector = (props: PrioritySelectoProps) => {
     <div className={styles.container}>
       <ul>
         {PRIORITY_OPTIONS.map((option) => (
-          <li key={option.value}>
+          <li
+            key={option.value}
+            className={
+              props.priority == option.value ? styles.darkBackground : ""
+            }
+            onClick={() => props.changePriority(option)}
+          >
             <div>
               {<Icons name="PriorityFlag" fill={option.fill} stroke={"#666"} />}
               <span> {option.label}</span>
@@ -33,4 +41,3 @@ const PrioritySelector = (props: PrioritySelectoProps) => {
 };
 
 export default PrioritySelector;
-

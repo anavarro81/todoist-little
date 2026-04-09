@@ -32,9 +32,17 @@
   gap: 1rem;
 }
 
+.container ul li:hover {
+  background-color: #e6e6e6 !important;
+}
+
 .container ul div {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 1rem;
+}
+
+.darkBackground {
+  background-color: #e6e6e6 !important;
 }
