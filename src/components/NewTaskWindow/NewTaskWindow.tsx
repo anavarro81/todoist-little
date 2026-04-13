@@ -26,6 +26,17 @@ const initialTaskForm = {
   proyect: "",
 };
 
+const defaultPriority = {
+    haspriority: false,
+    value: "p4",
+    label: "prioridad 4",
+    fill: "none",
+    stroke: "#666",
+
+}
+
+
+
 const NewTaskWindow = () => {
   const [isVisible, setIsVisible] = useState(true);
 
@@ -67,6 +78,7 @@ const NewTaskWindow = () => {
   };
 
   const changePriority = (priority: any) => {
+    
     const haspriority = priority.value !== "p4";
 
     setPriorityState({
@@ -115,6 +127,9 @@ const NewTaskWindow = () => {
                     <>
                       <Icons name="PriorityFlag" fill={priorityState.fill} />
                       <span> {priorityState.value.toUpperCase()} </span>
+                      {<Icons name="Cancel" stroke="white" 
+                        onClick={() => changePriority(defaultPriority)}
+                      />}
                     </>
                   ) : (
                     <>
@@ -122,8 +137,6 @@ const NewTaskWindow = () => {
                       <span> Prioridad </span>
                     </>
                   )}
-
-                  {<Icons name="Chevron" />}
                 </button>
 
                 {isVisiblePrioritySelector && (

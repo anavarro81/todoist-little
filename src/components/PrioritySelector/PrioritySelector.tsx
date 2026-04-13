@@ -4,7 +4,6 @@ import { Icons } from "../Icons";
 interface PrioritySelectoProps {
   priority: "p1" | "p2" | "p3" | "p4";
   changePriority: (priority: any) => void;
-  
 }
 
 const PRIORITY_OPTIONS = [
@@ -29,6 +28,7 @@ const PrioritySelector = (props: PrioritySelectoProps) => {
             <div>
               {<Icons name="PriorityFlag" fill={option.fill} stroke={"#666"} />}
               <span> {option.label}</span>
+              
             </div>
             {props.priority == option.value && (
               <Icons name="Tick" fill="#d33322" />
