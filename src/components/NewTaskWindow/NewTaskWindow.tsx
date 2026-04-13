@@ -12,6 +12,7 @@ interface ITask {
   name: string;
   description: string;
   dueDate: Date | null;
+  priority: string;
   label: string[];
   proyect: string;
 }
@@ -20,6 +21,7 @@ const initialTaskForm = {
   name: "",
   description: "",
   dueDate: null,
+  priority: "p4",
   label: [],
   proyect: "",
 };
