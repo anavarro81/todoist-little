@@ -41,7 +41,7 @@ const NewTaskWindow = () => {
   /* Confirmation Modal */
 
   // Toggle Confirm modal
-  const [showConfirmModal, setShowConfirmModal] = useState(true);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
 
   const closeConfirmModal = () => {
     setShowConfirmModal(false);
@@ -107,6 +107,8 @@ const NewTaskWindow = () => {
     // Cierra la lista despues de haber seleccionado una prioridad.
     togglePrioritySelect();
   };
+
+  const createTask = () => {};
 
   return (
     isVisible && (
@@ -192,7 +194,7 @@ const NewTaskWindow = () => {
                 <span>Cancelar </span>
               </button>
 
-              <button type="submit">
+              <button type="submit" className={styles.newTask}>
                 {<Icons name="Add" />}
                 Añadir tarea
               </button>

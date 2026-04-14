@@ -110,3 +110,7 @@ input::placeholder {
 .relative {
   position: relative;
 }
+
+.newTask {
+  background-color: var(--main-color) !important;
+}
