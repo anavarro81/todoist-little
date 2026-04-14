@@ -3,6 +3,7 @@ import { Icons } from "../Icons";
 import { useState } from "react";
 import DateSelector from "../DateSelector/DateSelector";
 import PrioritySelector from "../PrioritySelector/PrioritySelector";
+import ConfirmationModal from "../ConfirmationModal/ConfirmationModal";
 
 interface NewTaskWindowProps {
   isVisible: boolean;
@@ -27,18 +28,33 @@ const initialTaskForm = {
 };
 
 const defaultPriority = {
-    haspriority: false,
-    value: "p4",
-    label: "prioridad 4",
-    fill: "none",
-    stroke: "#666",
-
-}
-
-
+  haspriority: false,
+  value: "p4",
+  label: "prioridad 4",
+  fill: "none",
+  stroke: "#666",
+};
 
 const NewTaskWindow = () => {
   const [isVisible, setIsVisible] = useState(true);
+
+  /* Confirmation Modal */
+
+  // Toggle Confirm modal
+  const [showConfirmModal, setShowConfirmModal] = useState(true);
+
+  const closeConfirmModal = () => {
+    setShowConfirmModal(false);
+  };
+
+  // Se pulsa en cancelar el aviso.
+  const handleDismiss = () => {};
+
+  // Se descartan los cambios
+  const handleConfirmDiscard = () => {
+    setShowConfirmModal(false);
+    setIsVisible(false);
+  };
 
   const [isVisibleDateSelector, setIsVisibeDateSelector] = useState(false);
 
@@ -78,7 +94,6 @@ const NewTaskWindow = () => {
   };
 
   const changePriority = (priority: any) => {
-    
     const haspriority = priority.value !== "p4";
 
     setPriorityState({
@@ -96,6 +111,15 @@ const NewTaskWindow = () => {
   return (
     isVisible && (
       <>
+        {showConfirmModal && (
+          <ConfirmationModal
+            handleConfirmDiscard={handleConfirmDiscard}
+            setShowConfirmModal={setShowConfirmModal}
+            handleDismiss={handleDismiss}
+            closeConfirmModal={closeConfirmModal}
+          />
+        )}
+
         <div className={styles.newTaskWindow}>
           <h1>Añadir nueva tarea</h1>
           <form className={styles.newTaskForm}>
@@ -127,9 +151,13 @@ const NewTaskWindow = () => {
                     <>
                       <Icons name="PriorityFlag" fill={priorityState.fill} />
                       <span> {priorityState.value.toUpperCase()} </span>
-                      {<Icons name="Cancel" stroke="white" 
-                        onClick={() => changePriority(defaultPriority)}
-                      />}
+                      {
+                        <Icons
+                          name="Cancel"
+                          stroke="white"
+                          onClick={() => changePriority(defaultPriority)}
+                        />
+                      }
                     </>
                   ) : (
                     <>
@@ -158,10 +186,12 @@ const NewTaskWindow = () => {
                 {<Icons name="Project" />}
                 <span>Asignar proyecto </span>
               </button> */}
-              <button type="button">
+
+              <button type="button" onClick={() => setShowConfirmModal(true)}>
                 {<Icons name="Cancel" />}
                 <span>Cancelar </span>
               </button>
+
               <button type="submit">
                 {<Icons name="Add" />}
                 Añadir tarea
