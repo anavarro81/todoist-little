@@ -1,6 +1,6 @@
 import styles from "./NewTaskWindow.module.css";
 import { Icons } from "../Icons";
-import { useState } from "react";
+import { useState, type MouseEventHandler } from "react";
 import DateSelector from "../DateSelector/DateSelector";
 import PrioritySelector from "../PrioritySelector/PrioritySelector";
 import ConfirmationModal from "../ConfirmationModal/ConfirmationModal";
@@ -60,9 +60,15 @@ const NewTaskWindow = () => {
 
   const [formTask, setFormTask] = useState<ITask>(initialTaskForm);
 
-  const handleTaskForm = (name: string, value: any) => {
+  const handleTaskForm = (e: any): void => {
+
+    const {name, value} = e.target
+
     setFormTask((prev) => ({ ...prev, [name]: value }));
+
   };
+
+
 
   const toggleDateSelector = () => {
     setIsVisibeDateSelector(!isVisibleDateSelector);
@@ -125,7 +131,12 @@ const NewTaskWindow = () => {
         <div className={styles.newTaskWindow}>
           <h1>Añadir nueva tarea</h1>
           <form className={styles.newTaskForm}>
-            <input type="text" placeholder="Nombre de la tarea" />
+            <input
+              type="text"
+              name="name"
+              onChange={handleTaskForm}
+              placeholder="Nombre de la tarea"
+            />
             <input type="text" placeholder="Descripción de la tarea"></input>
             <div className={styles.btnContFristBlock}>
               <button
@@ -140,9 +151,9 @@ const NewTaskWindow = () => {
                 <span>Fecha</span>
                 {<Icons name="Chevron" />}
               </button>
-              {isVisibleDateSelector && (
-                <DateSelector handleTaskForm={handleTaskForm} />
-              )}
+               {isVisibleDateSelector && (
+                 <DateSelector handleTaskForm={handleTaskForm} />
+              )} 
               <div>
                 <button
                   type="button"
