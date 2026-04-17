@@ -61,14 +61,10 @@ const NewTaskWindow = () => {
   const [formTask, setFormTask] = useState<ITask>(initialTaskForm);
 
   const handleTaskForm = (e: any): void => {
-
-    const {name, value} = e.target
+    const { name, value } = e.target;
 
     setFormTask((prev) => ({ ...prev, [name]: value }));
-
   };
-
-
 
   const toggleDateSelector = () => {
     setIsVisibeDateSelector(!isVisibleDateSelector);
@@ -137,7 +133,12 @@ const NewTaskWindow = () => {
               onChange={handleTaskForm}
               placeholder="Nombre de la tarea"
             />
-            <input type="text" placeholder="Descripción de la tarea"></input>
+            <input
+              type="text"
+              placeholder="Descripción de la tarea"
+              name="description"
+              onChange={handleTaskForm}
+            ></input>
             <div className={styles.btnContFristBlock}>
               <button
                 type="button"
@@ -151,9 +152,9 @@ const NewTaskWindow = () => {
                 <span>Fecha</span>
                 {<Icons name="Chevron" />}
               </button>
-               {isVisibleDateSelector && (
-                 <DateSelector handleTaskForm={handleTaskForm} />
-              )} 
+              {isVisibleDateSelector && (
+                <DateSelector handleTaskForm={handleTaskForm} />
+              )}
               <div>
                 <button
                   type="button"
